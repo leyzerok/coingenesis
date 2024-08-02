@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Web3Provider } from "./Web3Provider";
-import { ConnectKitButton } from "connectkit";
 import Header from "./Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,13 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
-    <html lang="en">
-      <Web3Provider >
-        <Header />
-        <body className={inter.className}>{children}</body>
-      </Web3Provider >
-      
-    </html>
+    <Web3Provider>
+      <html lang="en">
+        <head></head>
+        <body className={inter.className}>
+          <>
+            <Header />
+            {children}
+          </>
+        </body>
+      </html>
+    </Web3Provider>
   );
 }

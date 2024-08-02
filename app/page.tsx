@@ -6,7 +6,5 @@ import { ConnectKitButton } from "connectkit";
 import Header from "./Header";
 
 export default function Home() {
-  return (
-    <div> </div>
-  );
+  return <div> hello world</div>;
 }
