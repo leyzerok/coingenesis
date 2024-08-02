@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Web3Provider } from "./Web3Provider";
 import { ConnectKitButton } from "connectkit";
+import Header from "./Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,11 @@ export default function RootLayout({
   return (
 
     <html lang="en">
-      {/* <Web3Provider>
-      <ConnectKitButton /> */}
+      <Web3Provider >
+        <Header />
         <body className={inter.className}>{children}</body>
-      {/* </Web3Provider> */}
+      </Web3Provider >
+      
     </html>
   );
 }
