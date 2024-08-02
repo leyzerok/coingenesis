@@ -47,7 +47,7 @@ type HeaderMenuLink = {
     return (
       <header className="flex justify-between items-center p-4 bg-gray-100">
         <div className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="w-12 h-12 mr-3" />
+          <img src="/logo.svg" alt="Logo" className="w-12 h-12 mr-3" />
           <h1 className="text-2xl font-bold">My Web App</h1>
         </div>
         <nav>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Web3Provider } from "./Web3Provider";
 import { ConnectKitButton } from "connectkit";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,8 @@ export default function RootLayout({
       <Web3Provider >
         <Header />
         <body className={inter.className}>{children}</body>
+        <Footer />
       </Web3Provider >
-      
     </html>
   );
 }

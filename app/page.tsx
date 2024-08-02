@@ -7,6 +7,6 @@ import Header from "./Header";
 
 export default function Home() {
   return (
-    <div> </div>
+    <div> Hello</div>
   );
 }
