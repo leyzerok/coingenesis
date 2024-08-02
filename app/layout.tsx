@@ -3,8 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Web3Provider } from "./Web3Provider";
 import Header from "./Header";
+import { Space_Grotesk } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+const grotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +22,7 @@ export default function RootLayout({
     <Web3Provider>
       <html lang="en">
         <head></head>
-        <body className={inter.className}>
+        <body className={grotesk.className}>
           <>
             <Header />
             {children}

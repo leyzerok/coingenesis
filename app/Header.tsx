@@ -5,22 +5,15 @@ import Link from "next/link";
 import { ConnectKitButton } from "connectkit";
 import logo from "/public/logo.svg";
 import Image from "next/image";
-
-type HeaderMenuLink = {
-  label: string;
-  href: string;
-};
-
-export const menuLinks: HeaderMenuLink[] = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "Debug Contracts",
-    href: "/debug",
-  },
-];
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 const Header: React.FC = () => {
   return (
@@ -34,20 +27,53 @@ const Header: React.FC = () => {
           width={353}
         />
       </div>
-      <nav>
-        <Link
-          href="/"
-          className="hover:bg-secondary hover:shadow-md focus:bg-secondary active:text-neutral py-1.5 px-3 text-sm rounded-full text-black"
-        >
-          Launchpad
-        </Link>
-        <Link
-          href="/deploy"
-          className="hover:bg-secondary hover:shadow-md focus:bg-secondary active:text-neutral py-1.5 px-3 text-sm rounded-full text-black"
-        >
-          Token Deploy Proposal
-        </Link>
-      </nav>
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <Link href="/" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Launchpad
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link href="/" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Token Deploy Proposal
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          {/* 
+              // TODO: this position is broken
+          */}
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Learn more</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul>
+                <li className="flex flex-nowrap">
+                  <NavigationMenuLink asChild>
+                    <Link href="/attestation">
+                      Certified Deployer Attestation
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="/community">Community</Link>
+                  </NavigationMenuLink>
+                </li>
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="/docs">Documentation</Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
       <div>
         <ConnectKitButton />
       </div>
