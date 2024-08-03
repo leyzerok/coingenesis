@@ -59,12 +59,12 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-center justify-center">
                         <h2 className="font-bold text-lg mb-2">Powered by</h2>
                         <div className="flex items-center">
-                            <Link href="https://www.gitcoin.co/" target="_blank" className="mr-8">
+                            <Link href="https://scroll.io/" target="_blank" className="mr-8">
                                 <Image src="/scroll.svg"
                                        alt="" width={130}
                                        height={49}/>
                             </Link>
-                            <Link href="https://www.gitcoin.co/" target="_blank" className="mr-6">
+                            <Link href="https://chain.link/" target="_blank" className="mr-6">
                                 <Image src="/chainlink.svg"
                                        alt="" width={130}
                                        height={49}/>
