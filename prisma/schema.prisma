@@ -14,8 +14,8 @@ model Project {
   symbol          String
   description     String     @db.Text
   website         String
-  tokenAvatar     String  // TODO: see how do we implement this
-  status          ProjectStatus
+  // tokenAvatar     String  // TODO: see how do we implement this
+  status          ProjectStatus @default(PENDING)
 
   
 
