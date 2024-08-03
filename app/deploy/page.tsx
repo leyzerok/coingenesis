@@ -10,6 +10,7 @@ import {Button} from "@/components/ui/button";
 import {createProject} from "../actions";
 import {createProjectSchema} from "../schemas";
 import {useState} from "react";
+import { useAccount } from "wagmi";
 
 const SCORER_ID = process.env.NEXT_PUBLIC_SCORER_ID
 const APIKEY = process.env.NEXT_PUBLIC_APIKEY
@@ -28,11 +29,16 @@ const Deploy = () => {
   });
 
     const [point, setPoint] = useState<number | undefined>(undefined);
+    const { address, isConnecting, isDisconnected } = useAccount();
 
     async function verifyGitcoinScore() {
         signGitcoin();
-        //TODO get address from connected wallet
-        let address = '0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1'
+        console.log(address)
+        if (address === undefined) {
+            setPoint(undefined);
+            throw new Error("Wallet is not connected");
+        }
+        let address1 = '0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1'
         sendPassportToScorer(address);
         let pointForWallet = getPassportScore(address);
         setPoint(await pointForWallet)
@@ -45,7 +51,7 @@ const Deploy = () => {
         })
     }
 
-    async function sendPassportToScorer(address: string) {
+    async function sendPassportToScorer(address: `0x${string}` | undefined) {
         const url = 'https://api.scorer.gitcoin.co/registry/submit-passport';
         try {
             const response = await fetch(url, {
@@ -66,7 +72,7 @@ const Deploy = () => {
         }
     }
 
-    async function getPassportScore(currentAddress: string): Promise<number | undefined> {
+    async function getPassportScore(currentAddress: `0x${string}` | undefined): Promise<number | undefined> {
         const GET_PASSPORT_SCORE_URI = `https://api.scorer.gitcoin.co/registry/score/${SCORER_ID}/${currentAddress}`
         try {
             const response = await fetch(GET_PASSPORT_SCORE_URI, {
