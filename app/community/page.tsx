@@ -1,11 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import argentinaeth from '/public/argentinaeth.svg';
-import x from '/public/x.svg';
-import scroll from '/public/scroll.svg';
-import question from '/public/question.svg';
-import banana from '/public/banana.svg';
 import frame from '/public/frame.svg';
 import frame_banana from '/public/frame_banana.svg';
 
