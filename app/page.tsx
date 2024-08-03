@@ -31,9 +31,8 @@ export default async function Home() {
   return (
     <div className="border flex flex-col items-center bg-[#dcdee4]">
       <div>
-        <div className="mt-12">
+        <div className="mt-12 flex justify-center items-center">
           <Image
-            className="flex justify-center items-center"
             src={intro}
             alt="coingenesis"
             height={400}
