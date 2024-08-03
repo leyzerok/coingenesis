@@ -54,7 +54,7 @@ const Header: React.FC = () => {
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Learn more</NavigationMenuTrigger>
                         <NavigationMenuContent className="ml-auto">
-                            <ul className="flex flex-col w-[200px] gap-3 p-4 md:w-[300px] lg:w-[300px]">
+                            <ul className="flex flex-col w-[200px] gap-3 p-4 md:w-[300px] lg:w-[400px]">
                                 {components.map((component) => (
                                     <ListItem
                                         key={component.title}
