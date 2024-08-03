@@ -22,11 +22,10 @@ model Project {
   // tokenAvatar     String  // TODO: see how do we implement this
   status          ProjectStatus @default(PENDING)
   isActive       Boolean @default(false)
-
-  
-
-  
-  // TODO: launch type: INDIVIDIAL | CORPORATION
+  launchType      LaunchType
+  team            String?
+  roadmap         String?
+ 
   whitepaper      String?
 
   
@@ -37,4 +36,9 @@ enum ProjectStatus {
   ACCEPTED
   DEPLOYED
   REJECTED
+}
+
+enum LaunchType {
+  INDIVIDUAL
+  CORPORATION
 }

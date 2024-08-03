@@ -11,4 +11,6 @@ export const createProjectSchema = z.object({
   proposer: z.string().length(42),
   humanityScore: z.string(),
   whitepaper: z.string().optional(),
+  team: z.string().optional(),
+  roadmap: z.string().optional()
 });
