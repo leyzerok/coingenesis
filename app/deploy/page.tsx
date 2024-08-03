@@ -183,7 +183,7 @@ const Deploy = () => {
                     </>
                 }
 
-                <Button onClick={verifyGitcoinScore} className="w-full justify-center">
+                <Button onClick={verifyGitcoinScore} className="w-full bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition">
                     Verify Score
                 </Button>
             </div>
