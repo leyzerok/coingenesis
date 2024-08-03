@@ -10,9 +10,9 @@ const Community: React.FC = () => {
             <h1 className="text-4xl font-bold mb-16 mt-8">Community</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-16 gap-x-0 max-w-5xl">
                 <div className="text-center lg:text-left order-2 lg:order-1">
-                    <h1 className="text-2xl font-bold mb-4">Certified Deployer Attestation</h1>
+                    <h1 className="text-2xl font-bold mb-4">The Level Up Hackathon by Ethereum Argentina & Scroll</h1>
                     <p className="text-lg mb-8">
-                        Certified Deployer Attestation is an exclusive badge awarded to individuals or corporates who have successfully launched more than three tokens on the CoinGenesis Launchpad Platform. This certification signifies trust, experience, and reliability in the token deployment process, making these deployers more attractive to investors and partners. The certification not only recognizes their proven track record but also enhances their credibility within the community.
+                        The Level Up Hackathon by Ethereum Argentina is a community-driven event designed to foster the next generation of projects within the Scroll ecosystem. This hackathon aims to bring together enthusiasts and developers. It includes a bootcamp led by the Scroll Team and offers participants opportunities to build and pitch their projects. The event is co-hosted by notable entities such as Buidlers Tech, Scroll, PSE, Chainlink Labs, Aztec, and API3.
                     </p>
                 </div>
                 <div className="flex justify-center lg:justify-end order-1 lg:order-2">
