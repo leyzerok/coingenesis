@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { createProject } from "../actions";
 import { createProjectSchema } from "../schemas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 const SCORER_ID = process.env.NEXT_PUBLIC_SCORER_ID;
@@ -30,26 +30,30 @@ const headers = APIKEY
   : undefined;
 
 const Deploy = () => {
+  const [point, setPoint] = useState<number | undefined>(undefined);
+  const { address } = useAccount();
+
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
+    defaultValues: {
+      proposer: address as `0x${string}`,
+      humanityScore: point?.toString() || "0",
+    },
   });
 
-  const [point, setPoint] = useState<number | undefined>(undefined);
-  console.log(point);
-  const { address, isConnecting, isDisconnected } = useAccount();
-
   async function verifyGitcoinScore() {
-    console.log("inside verify");
     await signGitcoin();
     console.log(address);
     if (address === undefined) {
       setPoint(undefined);
       throw new Error("Wallet is not connected");
     }
-    let address1 = "0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1"; // address verified to be a human
-    await sendPassportToScorer(address);
-    let pointForWallet = await getPassportScore(address);
+    let address1 =
+      "0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1" as `0x${string}`; // address verified to be a human
+    await sendPassportToScorer(address1);
+    let pointForWallet = await getPassportScore(address1);
     setPoint(pointForWallet);
+    form.setValue("humanityScore", pointForWallet?.toString() || "0");
   }
 
   async function signGitcoin() {
@@ -111,6 +115,37 @@ const Deploy = () => {
       <div className="border border-black rounded-xl p-5 max-w-4xl min-w-[700px]">
         <Form {...form}>
           <form className="flex flex-col gap-4" action={createProject}>
+            {/* HIDDEN FIELDS */}
+            <FormField
+              control={form.control}
+              name="proposer"
+              defaultValue={address}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Proposer</FormLabel>
+                  <FormControl>
+                    <Input placeholder="0x" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="humanityScore"
+              defaultValue={point?.toString()}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Humanity Score</FormLabel>
+                  <FormControl>
+                    <Input placeholder="0" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* NORMAL FIELDS */}
             <FormField
               control={form.control}
               name="name"
@@ -165,6 +200,48 @@ const Deploy = () => {
             />
             <FormField
               control={form.control}
+              name="twitter"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Twitter</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://twitter.com/user" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discord"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discord</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="https://discord.com/invite/user"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="telegram"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Telegram</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://t.me/user" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="whitepaper"
               render={({ field }) => (
                 <FormItem>
@@ -176,6 +253,15 @@ const Deploy = () => {
                 </FormItem>
               )}
             />
+            <div className="flex w-full justify-center ">
+              <Button
+                disabled={point === undefined || point <= 0}
+                type="submit"
+                className="w-full bg-black border border-black text-white py-4 px-8 text-lg rounded-full hover:bg-transparent hover:text-black transition max-w-2xl mb-4"
+              >
+                Submit Proposal
+              </Button>
+            </div>
           </form>
         </Form>
       </div>
@@ -198,16 +284,6 @@ const Deploy = () => {
             Verify Score
           </Button>
         </div>
-      </div>
-
-      <div className="flex w-full justify-center ">
-        <Button
-          disabled={point === undefined || point <= 0}
-          type="submit"
-          className="w-full bg-black border border-black text-white py-4 px-8 text-lg rounded-full hover:bg-transparent hover:text-black transition max-w-2xl mb-4"
-        >
-          Submit Proposal
-        </Button>
       </div>
     </div>
   );
