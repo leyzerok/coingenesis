@@ -11,8 +11,18 @@ export const createProject = async (formData: FormData) => {
     const data = Object.fromEntries(formData.entries());
 
     const prisma = new PrismaClient();
-    const { name, symbol, description, website, whitepaper } =
-      createProjectSchema.parse(data);
+    const {
+      name,
+      symbol,
+      description,
+      website,
+      whitepaper,
+      twitter,
+      discord,
+      telegram,
+      proposer,
+      humanityScore,
+    } = createProjectSchema.parse(data);
 
     await prisma.project.create({
       data: {
@@ -21,6 +31,11 @@ export const createProject = async (formData: FormData) => {
         description,
         website,
         whitepaper,
+        twitter,
+        discord,
+        telegram,
+        proposer,
+        humanityScore: parseFloat(humanityScore),
       },
     });
 

@@ -13,12 +13,10 @@ async function getProjects() {
 
   const mockProjects = projects.map((project) => {
     return {
-      id: project.id,
-      status: project.status,
-      tokenName: project.name,
       raised: 1763,
       ath: 124.0,
       marketCap: 2140956,
+      ...project,
     };
   });
 

@@ -12,19 +12,17 @@ import tokenPlaceholder from "/public/token-logo-placeholder.png";
 import Image from "next/image";
 import { deployProject, rejectProject } from "./actions";
 import { Button } from "@/components/ui/button";
-import { ProjectStatus } from "@prisma/client";
+import { Project, ProjectStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { abi } from "@/abis/abi";
+import { useAccount, usePublicClient, useWriteContract } from "wagmi";
 
 const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-interface Projects {
-  id: string;
-  status: ProjectStatus;
-  tokenLogo?: string;
-  tokenName: string;
+interface ProjectData extends Project {
   raised: number;
   ath: number;
   marketCap: number;
@@ -32,17 +30,58 @@ interface Projects {
 
 const Row = ({
   id,
+  symbol,
   status,
-  tokenLogo,
-  tokenName,
+  website,
+  name,
   raised,
   ath,
   marketCap,
-}: Projects) => {
+  discord,
+  telegram,
+  twitter,
+}: ProjectData) => {
   const router = useRouter();
+  const { address } = useAccount();
+  const { data: hash, writeContract, isPending, error } = useWriteContract();
+
+  // TODO: show toast when submitted or error
+
+  console.log("🚀 ~ error:", error);
 
   const handleDeploy = async () => {
-    await deployProject(id);
+    if (!address) {
+      console.error("no address");
+      return;
+    }
+
+    await deployProject(id); // TODO: uncomment this
+
+    console.log("starting deploy...");
+    writeContract({
+      address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+      abi,
+      functionName: "createToken",
+      args: [
+        {
+          name,
+          symbol,
+          twitterURL: twitter,
+          discordURL: discord,
+          websiteURL: website,
+          telegramURL: telegram,
+          imageURL: "image", // TODO
+          tokenCreator: address,
+          // this values are hardcoded for now, but will be configurable in the future
+          totalSupply: BigInt("1000000000000000000000000000"),
+          availableSupply: BigInt("800000000000000000000000000"),
+          ethTarget: BigInt("100000000000000000000"),
+        },
+      ],
+    });
+
+    console.log("finished?");
+
     router.refresh();
   };
   const handleReject = async () => {
@@ -56,12 +95,12 @@ const Row = ({
         <Link href={`/project/${id}`}>
           <div className="flex flex-col gap-2 items-center">
             <Image
-              src={tokenLogo || tokenPlaceholder.src}
+              src={tokenPlaceholder.src}
               alt="token logo"
               height={63}
               width={63}
             />
-            {tokenName}
+            {name}
           </div>
         </Link>
       </TableCell>
@@ -87,11 +126,12 @@ const Row = ({
         </TableCell>
       )}
     </TableRow>
+    // TODO: add some loading indicator or something
   );
 };
 
 interface LaunchPadTableProps {
-  items: Projects[];
+  items: ProjectData[];
   showActions?: boolean;
 }
 
@@ -113,7 +153,7 @@ export const LaunchpadTable = ({
         </TableHeader>
         <TableBody>
           {items.map((row) => (
-            <Row {...row} key={row.tokenName} />
+            <Row {...row} key={row.id} />
           ))}
         </TableBody>
       </Table>

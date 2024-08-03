@@ -14,6 +14,11 @@ model Project {
   symbol          String
   description     String     @db.Text
   website         String
+  twitter         String
+  discord         String
+  telegram        String
+  proposer        String // proposer address
+  humanityScore   Int
   // tokenAvatar     String  // TODO: see how do we implement this
   status          ProjectStatus @default(PENDING)
   isActive       Boolean @default(false)
@@ -23,7 +28,6 @@ model Project {
   
   // TODO: launch type: INDIVIDIAL | CORPORATION
   whitepaper      String?
-  contractAddress String?
 
   
 }

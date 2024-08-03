@@ -4,7 +4,11 @@ export const createProjectSchema = z.object({
   name: z.string().min(1),
   symbol: z.string().min(1).max(5),
   description: z.string().min(1),
-  // TODO: social media
   website: z.string().url(),
+  twitter: z.string().url(),
+  discord: z.string().url(),
+  telegram: z.string(),
+  proposer: z.string().length(42),
+  humanityScore: z.string(),
   whitepaper: z.string().optional(),
 });
