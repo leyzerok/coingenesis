@@ -1,14 +1,11 @@
 "use client";
 
 import React from "react";
-import {useRouter} from "next/navigation";
 import Image from "next/image";
 import logo from "/public/logo.svg";
 import Link from "next/link";
 
 const Footer: React.FC = () => {
-    const router = useRouter();
-
     return (
         <footer className="bg-gray-100 py-2 text-sm">
             <div className="max-w-full container pt-2 pb-2">
