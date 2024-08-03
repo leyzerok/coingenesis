@@ -28,14 +28,14 @@ const Header: React.FC = () => {
           alt="Logo"
           className=""
           height={113}
-          width={353}
+          width={356}
         />
       </Link>
 
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
+            <Link href="/launchpad" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Launchpad
               </NavigationMenuLink>
