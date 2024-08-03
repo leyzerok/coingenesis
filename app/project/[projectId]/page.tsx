@@ -31,7 +31,7 @@ const Project = async ({ params }: Params) => {
 
   console.log(params);
   return (
-    <div className="flex gap-5 mx-auto items-start justify-center pt-6 ">
+    <div className="flex gap-5 mx-auto items-start justify-center py-6">
       <div className="flex flex-col gap-2">
         <div className="flex gap-4 items-center">
           <Image

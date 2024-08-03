@@ -14,8 +14,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useAccount } from "wagmi";
+import { adminAddresses } from "./consts";
 
 const Header: React.FC = () => {
+  const { address } = useAccount();
+
   return (
     <header className="flex justify-between items-center p-4 bg-gray-100">
       <Link href="/" className="flex items-center">
@@ -75,8 +79,11 @@ const Header: React.FC = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <div>
+      <div className="flex flex-col">
         <ConnectKitButton />
+        {address && adminAddresses.includes(address) && (
+          <Link href="/admin">Admin</Link>
+        )}
       </div>
     </header>
   );
