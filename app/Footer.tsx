@@ -19,39 +19,39 @@ const Footer: React.FC = () => {
                     </div>
 
                     <div className="pt-4">
-                        <p className="text-2xl pb-2">Socials</p>
+                        <p className="font-bold text-lg pb-2">Socials</p>
                         <div className="flex items-center justify-center space-x-4">
                             <div className="text-left">
                                 <p><Link href="https://twitter.com" target="_blank"
-                                         className="text-left text-black">X / Twitter</Link></p>
+                                         className="text-left text-black hover:underline">X / Twitter</Link></p>
                                 <p><Link href="https://github.com/leyzerok/coingenesis" target="_blank"
-                                         className="text-left text-black">Github</Link></p>
+                                         className="text-left text-black hover:underline">Github</Link></p>
                             </div>
                             <div>
                                 <p><Link href="https://medium.com/" target="_blank"
-                                         className="text-left text-black">Medium</Link></p>
+                                         className="text-left text-black hover:underline">Medium</Link></p>
                                 <p><Link href="https://discord.gg" target="_blank"
-                                         className="text-left text-black">Discord</Link></p>
+                                         className="text-left text-black hover:underline">Discord</Link></p>
                             </div>
                         </div>
                     </div>
 
                     <div className="text-left pt-4">
-                        <p className="text-2xl pb-2">Company</p>
+                        <p className="font-bold text-lg pb-2">Company</p>
                         <div className="flex items-start justify-start space-x-4">
                             <div className="text-left">
-                                <p><Link href="/community" className="text-left text-black">Community</Link></p>
-                                <p><Link href="/docs" className="text-left text-black">Docs</Link></p>
+                                <p><Link href="/community" className="text-left text-black hover:underline">Community</Link></p>
+                                <p><Link href="/docs" className="text-left text-black hover:underline">Docs</Link></p>
                             </div>
                         </div>
                     </div>
 
                     <div className="pt-4">
-                        <p className="text-2xl pb-2">Legal</p>
+                        <p className="font-bold text-lg pb-2">Legal</p>
                         <div className="flex items-center justify-start space-x-4">
                             <div className="text-left">
-                                <p className="text-left left-0 text-black">Privacy Policy</p>
-                                <p className="text-left text-black">Terms of Use</p>
+                                <p className="text-left left-0 text-black hover:underline">Privacy Policy</p>
+                                <p className="text-left text-black hover:underline">Terms of Use</p>
                             </div>
                         </div>
                     </div>
@@ -59,12 +59,12 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-center justify-center">
                         <h2 className="font-bold text-lg mb-2">Powered by</h2>
                         <div className="flex items-center">
-                            <Link href="https://www.gitcoin.co/" target="_blank" className="pr-2">
+                            <Link href="https://www.gitcoin.co/" target="_blank" className="mr-8">
                                 <Image src="/scroll.svg"
                                        alt="" width={130}
                                        height={49}/>
                             </Link>
-                            <Link href="https://www.gitcoin.co/" target="_blank">
+                            <Link href="https://www.gitcoin.co/" target="_blank" className="mr-6">
                                 <Image src="/chainlink.svg"
                                        alt="" width={130}
                                        height={49}/>
