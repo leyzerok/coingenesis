@@ -34,7 +34,7 @@ const endedLaunchpadMock = [
 
 export default function Home() {
   return (
-    <div className="border border-red-500 flex flex-col items-center">
+    <div className="border flex flex-col items-center">
       <div>
         <h2 className="text-3xl text-center py-14 font-bold">
           Active Launchpads
