@@ -27,7 +27,7 @@ const Attestation: React.FC = () => {
           The TDP process involves submitting detailed information about the token, including its name, symbol, description, social media links, website, and contact details.
           </li>
           <li>
-          For individual deployers, an essential requirement is either KYC or a Gitcoin Passport Score >40. For corporate deployers, KYC is mandatory. Optional information such as a whitepaper for individuals and a roadmap for corporates can also be submitted to provide a comprehensive overview of the project.
+          For individual deployers, an essential requirement is either KYC or a Gitcoin Passport Score of at least 40. For corporate deployers, KYC is mandatory. Optional information such as a whitepaper for individuals and a roadmap for corporates can also be submitted to provide a comprehensive overview of the project.
           </li>
         </ul>
         <h1 className="text-3xl font-bold mb-4">Certified Deployer Attestation</h1>
