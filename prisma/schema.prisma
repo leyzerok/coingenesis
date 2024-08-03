@@ -1,0 +1,35 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Project {
+  id              String     @id @default(uuid())
+  name            String
+  symbol          String
+  description     String     @db.Text
+  website         String
+  tokenAvatar     String  // TODO: see how do we implement this
+  status          ProjectStatus
+
+  
+
+  
+  // TODO: launch type: INDIVIDIAL | CORPORATION
+  whitepaper      String?
+  contractAddress String?
+
+  
+}
+
+enum ProjectStatus {
+  PENDING
+  ACCEPTED
+  DEPLOYED
+  REJECTED
+}
