@@ -14,6 +14,7 @@ import { deployProject, rejectProject } from "./actions";
 import { Button } from "@/components/ui/button";
 import { ProjectStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -52,23 +53,29 @@ const Row = ({
   return (
     <TableRow className="border-none">
       <TableCell className="font-medium">
-        <div className="flex flex-col gap-2 items-center">
-          <Image
-            src={tokenLogo || tokenPlaceholder.src}
-            alt="token logo"
-            height={63}
-            width={63}
-          />
-          {tokenName}
-        </div>
+        <Link href={`/project/${id}`}>
+          <div className="flex flex-col gap-2 items-center">
+            <Image
+              src={tokenLogo || tokenPlaceholder.src}
+              alt="token logo"
+              height={63}
+              width={63}
+            />
+            {tokenName}
+          </div>
+        </Link>
       </TableCell>
+
       <TableCell className="text-right text-lg">
         {formatNumber(raised)} ETH
       </TableCell>
+
       <TableCell className="text-lg">{ath} x</TableCell>
+
       <TableCell className="text-right text-lg">
         {formatNumber(marketCap)} USD
       </TableCell>
+
       {status === "PENDING" && (
         <TableCell>
           <div className="flex gap-1">

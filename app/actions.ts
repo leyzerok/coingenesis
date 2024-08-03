@@ -14,7 +14,7 @@ export const createProject = async (formData: FormData) => {
     const { name, symbol, description, website, whitepaper } =
       createProjectSchema.parse(data);
 
-    const newProject = await prisma.project.create({
+    await prisma.project.create({
       data: {
         name,
         symbol,
