@@ -1,116 +1,88 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 import logo from "/public/logo.svg";
 import Link from "next/link";
 
 const Footer: React.FC = () => {
-  const router = useRouter();
+    const router = useRouter();
 
-  return (
-    <footer className="bg-gray-100 py-4 text-sm">
-      <div className="container mx-auto flex flex-wrap justify-center items-center text-black">
-        <div className="w-full lg:w-1/3 mb-4 lg:mb-0 text-left items-start">
-          <Image
-            src={logo.src}
-            alt="Logo"
-            className=""
-            height={76}
-            width={241}
-          />
-          <p className="pl-6">© 2024 Starecore, Inc. All Rights Reserved.</p>
-        </div>
-        <div className="w-full lg:w-3/5 flex justify-between space-x-4">
-          <div className="flex flex-col items-start">
-            <h2 className="font-bold text-lg mb-1">Socials</h2>
-            <ul>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  X / Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  Github
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-start">
-            <h2 className="font-bold text-lg mb-1">Company</h2>
-            <ul>
-              <li>
-                <a href="/community" className="hover:underline">
-                  Community
-                </a>
-              </li>
-              <li>
-                <a href="/docs" className="hover:underline">
-                  Docs
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-start">
-            <h2 className="font-bold text-lg mb-1">Legal</h2>
-            <ul>
-              <li>
-                <a href="/privacy-policy" className="hover:underline">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="/terms-of-use" className="hover:underline">
-                  Terms of Use
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-center mb-16 lg:mb-0">
-            <h2 className="font-bold text-lg mb-2">Powered by</h2>
-            <div className="flex gap-4">
-              <Link href="https://scroll.io/" target="_blank">
-                <Image
-                    src="/scroll.svg"
-                    alt="Scroll"
-                    className="pt-1"
-                    width={130}
-                    height={31}
-                />
-              </Link>
-              <Link href="https://chain.link/" target="_blank">
-                <Image
-                  src="/chainlink.svg"
-                  alt="Chainlink"
-                  className="pt-2"
-                  width={130}
-                  height={31}
-                />
-              </Link>
-              <Link href="https://www.gitcoin.co/" target="_blank">
-                <Image
-                    src="/gitcoin.svg"
-                    alt="Gitcoin"
-                    width={130}
-                    height={31}
-                />
-              </Link>
+    return (
+        <footer className="bg-gray-100 py-2 text-sm">
+            <div className="max-w-full container pt-2 pb-2">
+
+                <div className="container mx-auto flex justify-between items-center text-black space-x-2">
+                    <div>
+                        <Link href="/">
+                            <Image src={logo.src} className="" width={241} height={76} alt=""/>
+                        </Link>
+                        <p className="text-center text-black pl-6">© 2024 Starecore, Inc. All Rights reserved.</p>
+                    </div>
+
+                    <div className="pt-4">
+                        <p className="text-2xl pb-2">Socials</p>
+                        <div className="flex items-center justify-center space-x-4">
+                            <div className="text-left">
+                                <p><Link href="https://twitter.com" target="_blank"
+                                         className="text-left text-black">X / Twitter</Link></p>
+                                <p><Link href="https://github.com/leyzerok/coingenesis" target="_blank"
+                                         className="text-left text-black">Github</Link></p>
+                            </div>
+                            <div>
+                                <p><Link href="https://medium.com/" target="_blank"
+                                         className="text-left text-black">Medium</Link></p>
+                                <p><Link href="https://discord.gg" target="_blank"
+                                         className="text-left text-black">Discord</Link></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="text-left pt-4">
+                        <p className="text-2xl pb-2">Company</p>
+                        <div className="flex items-start justify-start space-x-4">
+                            <div className="text-left">
+                                <p><Link href="/community" className="text-left text-black">Community</Link></p>
+                                <p><Link href="/docs" className="text-left text-black">Docs</Link></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="pt-4">
+                        <p className="text-2xl pb-2">Legal</p>
+                        <div className="flex items-center justify-start space-x-4">
+                            <div className="text-left">
+                                <p className="text-left left-0 text-black">Privacy Policy</p>
+                                <p className="text-left text-black">Terms of Use</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center">
+                        <h2 className="font-bold text-lg mb-2">Powered by</h2>
+                        <div className="flex items-center">
+                            <Link href="https://www.gitcoin.co/" target="_blank" className="pr-2">
+                                <Image src="/scroll.svg"
+                                       alt="" width={130}
+                                       height={49}/>
+                            </Link>
+                            <Link href="https://www.gitcoin.co/" target="_blank">
+                                <Image src="/chainlink.svg"
+                                       alt="" width={130}
+                                       height={49}/>
+                            </Link>
+                            <Link href="https://www.gitcoin.co/" target="_blank">
+                                <Image src="/gitcoin.svg"
+                                       alt="" width={130}
+                                       height={49}/>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+        </footer>
+    );
 };
 
 export default Footer;
