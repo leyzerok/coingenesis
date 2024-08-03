@@ -15,18 +15,28 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useAccount } from "wagmi";
+import { adminAddresses } from "./consts";
 
 const Header: React.FC = () => {
+    const { address } = useAccount();
+
     return (
         <header className="flex justify-between items-center p-4 bg-gray-100">
             <Link href="/" className="flex items-center">
-                <Image src={logo.src} alt="Logo" height={113} width={353} />
+                <Image
+                    src={logo.src}
+                    alt="Logo"
+                    className=""
+                    height={113}
+                    width={356}
+                />
             </Link>
 
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <Link href="/" legacyBehavior passHref>
+                        <Link href="/launchpad" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 Launchpad
                             </NavigationMenuLink>
@@ -43,28 +53,27 @@ const Header: React.FC = () => {
 
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Learn more</NavigationMenuTrigger>
-                        <div className="ml-20">
-                            <NavigationMenuContent className="">
-                                <ul className="flex flex-col w-[200px] gap-3 p-4 md:w-[300px] lg:w-[370px] ml-0">
-                                    {components.map((component) => (
-                                        <ListItem
-                                            key={component.title}
-                                            title={component.title}
-                                            href={component.href}
-                                        >
-                                            {component.description}
-                                        </ListItem>
-                                    ))}
-                                </ul>
-                            </NavigationMenuContent>
-
-                        </div>
+                        <NavigationMenuContent className="ml-auto">
+                            <ul className="flex flex-col w-[200px] gap-3 p-4 md:w-[300px] lg:w-[300px]">
+                                {components.map((component) => (
+                                    <ListItem
+                                        key={component.title}
+                                        title={component.title}
+                                        href={component.href}
+                                    >
+                                        {component.description}
+                                    </ListItem>
+                                ))}
+                            </ul>
+                        </NavigationMenuContent>
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
-
-            <div>
+            <div className="flex flex-col">
                 <ConnectKitButton />
+                {address && adminAddresses.includes(address) && (
+                    <Link href="/admin">Admin</Link>
+                )}
             </div>
         </header>
     );

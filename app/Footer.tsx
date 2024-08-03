@@ -10,17 +10,17 @@ const Footer: React.FC = () => {
   const router = useRouter();
 
   return (
-    <footer className="bg-gray-100 py-4 px-8 text-sm">
-      <div className="container mx-auto flex flex-wrap justify-between items-center text-black">
+    <footer className="bg-gray-100 py-4 text-sm">
+      <div className="container mx-auto flex flex-wrap justify-center items-center text-black">
         <div className="w-full lg:w-1/3 mb-4 lg:mb-0 text-left items-start">
           <Image
             src={logo.src}
             alt="Logo"
             className=""
-            height={20}
-            width={150}
+            height={76}
+            width={241}
           />
-          <p>© 2024 Starecore, Inc. All Rights Reserved.</p>
+          <p className="pl-6">© 2024 Starecore, Inc. All Rights Reserved.</p>
         </div>
         <div className="w-full lg:w-3/5 flex justify-between space-x-4">
           <div className="flex flex-col items-start">
@@ -80,17 +80,30 @@ const Footer: React.FC = () => {
             <h2 className="font-bold text-lg mb-2">Powered by</h2>
             <div className="flex gap-4">
               <Link href="https://scroll.io/" target="_blank">
-                <img src="/scroll.svg" alt="Scroll" className="h-16 w-16" />
+                <Image
+                    src="/scroll.svg"
+                    alt="Scroll"
+                    className="pt-1"
+                    width={130}
+                    height={31}
+                />
               </Link>
               <Link href="https://chain.link/" target="_blank">
-                <img
+                <Image
                   src="/chainlink.svg"
                   alt="Chainlink"
-                  className="h-16 w-16"
+                  className="pt-2"
+                  width={130}
+                  height={31}
                 />
               </Link>
               <Link href="https://www.gitcoin.co/" target="_blank">
-                <img src="/gitcoin.svg" alt="Gitcoin" className="h-16 w-16" />
+                <Image
+                    src="/gitcoin.svg"
+                    alt="Gitcoin"
+                    width={130}
+                    height={31}
+                />
               </Link>
             </div>
           </div>
