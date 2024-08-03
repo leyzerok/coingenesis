@@ -42,11 +42,11 @@ export default async function Home() {
 
         <div className="mt-12 mb-12 flex justify-center items-center font-space-grotesk font-medium text-[20px] leading-[26px] text-black space-x-4">
           <div>Connect Wallet</div>
-          <div>→</div>
+          <div className="font-bold text-lg">→</div>
           <div>Submit a Token Deploy Proposal</div>
-          <div>→</div>
+          <div className="font-bold text-lg">→</div>
           <div>Become a Certified Deployer</div>
-          <div>→</div>
+          <div className="font-bold text-lg">→</div>
           <div>Dive into the Pre-Market Trading</div>
         </div>
 
