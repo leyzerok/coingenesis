@@ -44,7 +44,7 @@ const Header: React.FC = () => {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                        <Link href="/deploy" legacyBehavior passHref>
+                        <Link href="/tokendeploy" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 Token Deploy Proposal
                             </NavigationMenuLink>
