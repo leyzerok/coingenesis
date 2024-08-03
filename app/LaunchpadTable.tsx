@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,12 +10,18 @@ import {
 } from "@/components/ui/table";
 import tokenPlaceholder from "/public/token-logo-placeholder.png";
 import Image from "next/image";
+import { deployProject, rejectProject } from "./actions";
+import { Button } from "@/components/ui/button";
+import { ProjectStatus } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
 interface Projects {
+  id: string;
+  status: ProjectStatus;
   tokenLogo?: string;
   tokenName: string;
   raised: number;
@@ -21,7 +29,26 @@ interface Projects {
   marketCap: number;
 }
 
-const Row = ({ tokenLogo, tokenName, raised, ath, marketCap }: Projects) => {
+const Row = ({
+  id,
+  status,
+  tokenLogo,
+  tokenName,
+  raised,
+  ath,
+  marketCap,
+}: Projects) => {
+  const router = useRouter();
+
+  const handleDeploy = async () => {
+    await deployProject(id);
+    router.refresh();
+  };
+  const handleReject = async () => {
+    await rejectProject(id);
+    router.refresh();
+  };
+
   return (
     <TableRow className="border-none">
       <TableCell className="font-medium">
@@ -42,15 +69,29 @@ const Row = ({ tokenLogo, tokenName, raised, ath, marketCap }: Projects) => {
       <TableCell className="text-right text-lg">
         {formatNumber(marketCap)} USD
       </TableCell>
+      {status === "PENDING" && (
+        <TableCell>
+          <div className="flex gap-1">
+            <Button onClick={handleDeploy}>Deploy</Button>
+            <Button variant="destructive" onClick={handleReject}>
+              Reject
+            </Button>
+          </div>
+        </TableCell>
+      )}
     </TableRow>
   );
 };
 
 interface LaunchPadTableProps {
   items: Projects[];
+  showActions?: boolean;
 }
 
-export const LaunchpadTable = ({ items }: LaunchPadTableProps) => {
+export const LaunchpadTable = ({
+  items,
+  showActions = false,
+}: LaunchPadTableProps) => {
   return (
     <div>
       <Table className="border border-black">
@@ -60,6 +101,7 @@ export const LaunchpadTable = ({ items }: LaunchPadTableProps) => {
             <TableHead>Raised</TableHead>
             <TableHead>ATH</TableHead>
             <TableHead className="text-right">Market Cap</TableHead>
+            {showActions && <TableHead>Admin</TableHead>}
           </TableRow>
         </TableHeader>
         <TableBody>

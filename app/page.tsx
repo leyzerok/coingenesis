@@ -7,6 +7,8 @@ async function getProjects(status: ProjectStatus) {
 
   const mockProjects = projects.map((project) => {
     return {
+      id: project.id,
+      status: project.status,
       tokenName: project.name,
       raised: 1763,
       ath: 124.0,
@@ -34,7 +36,7 @@ export default async function Home() {
         <h2 className="text-3xl text-center py-14 font-bold">
           Ended Launchpads
         </h2>
-        <LaunchpadTable items={pendingProjects} />
+        <LaunchpadTable items={pendingProjects} showActions />
       </div>
     </div>
   );

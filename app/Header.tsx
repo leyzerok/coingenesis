@@ -18,7 +18,7 @@ import {
 const Header: React.FC = () => {
   return (
     <header className="flex justify-between items-center p-4 bg-gray-100">
-      <div className="flex items-center">
+      <Link href="/" className="flex items-center">
         <Image
           src={logo.src}
           alt="Logo"
@@ -26,7 +26,8 @@ const Header: React.FC = () => {
           height={113}
           width={353}
         />
-      </div>
+      </Link>
+
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

@@ -29,3 +29,22 @@ export const createProject = async (formData: FormData) => {
     console.log("🚀 ~ createProject ~ error:", error);
   }
 };
+
+export const deployProject = async (id: string) => {
+  // deploy the token
+  // TODO: deployment
+  // if successful, mark it as "DEPLOYED"
+  const prisma = new PrismaClient();
+  await prisma.project.update({
+    where: { id },
+    data: { status: "DEPLOYED" },
+  });
+};
+
+export const rejectProject = async (id: string) => {
+  const prisma = new PrismaClient();
+  await prisma.project.update({
+    where: { id },
+    data: { status: "REJECTED" },
+  });
+};
