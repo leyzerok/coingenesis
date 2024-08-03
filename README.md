@@ -1,3 +1,5 @@
+![CoinGenesis Banner](https://github.com/user-attachments/assets/dbb886ad-8f82-4e19-918f-28141daced6c)
+
 ## CoinGenesis Launchpad
 
 **Introduction to CoinGenesis**
