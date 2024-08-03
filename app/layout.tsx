@@ -26,8 +26,8 @@ export default function RootLayout({
         <body className={grotesk.className}>
           <>
             <Header />
-            <main className="flex-grow">{children}</main>
-          <Footer />          
+            {children}
+            <Footer />
           </>
         </body>
       </html>
