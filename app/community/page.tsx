@@ -1,11 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import argentinaeth from '/public/argentinaeth.svg';
-import x from '/public/x.svg';
-import scroll from '/public/scroll.svg';
-import question from '/public/question.svg';
-import banana from '/public/banana.svg';
+import frame from '/public/frame.svg';
+import frame_banana from '/public/frame_banana.svg';
 
 const Community: React.FC = () => {
     return (
@@ -20,17 +17,14 @@ const Community: React.FC = () => {
                 </div>
                 <div className="flex justify-center lg:justify-end order-1 lg:order-2">
                     <div className="flex space-x-2">
-                        <Image src={argentinaeth} alt="Ethereum Argentina" height={300} width={300} />
-                        <Image src={x} alt="X" height={20} width={20} />
-                        <Image src={scroll} alt="Scroll" height={300} width={250} />
+                        <Image src={frame} alt="Ethereum Argentina" height={500} width={500} />                   
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center lg:items-start order-3 lg:order-3 space-y-2 ml-20 mt-20">
-                    <Image src={question} alt="Question" height={96} width={96} />
-                    <Image src={banana} alt="Banana" height={96} width={96} />
+                <div className="flex flex-col items-center lg:items-start order-3 lg:order-3 space-y-2">
+                    <Image src={frame_banana} alt="Banana" height={500} width={500} />                    
                 </div>
-                <div className="text-center lg:text-left order-4 lg:order-4">
+                <div className="text-center lg:text-left order-4 lg:order-4 ml-4">
                     <h1 className="text-2xl font-bold mb-4">$BANANA is Coming Soon to CoinGenesis Launchpad</h1>
                     <p className="text-lg mb-8">
                         Get ready for a fruity revolution! $BANANA, the most anticipated memecoin of the season, is set to launch on CoinGenesis Launchpad.  This vibrant and fun-filled token aims to bring a fresh twist on Scroll Mainnet. $BANANA promises to deliver unique features and community-driven innovations. Stay tuned for more updates and prepare to peel away the layers of this exciting new project!

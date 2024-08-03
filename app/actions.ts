@@ -37,7 +37,7 @@ export const deployProject = async (id: string) => {
   const prisma = new PrismaClient();
   await prisma.project.update({
     where: { id },
-    data: { status: "DEPLOYED" },
+    data: { status: "DEPLOYED", isActive: true },
   });
 };
 

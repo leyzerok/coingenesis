@@ -16,6 +16,7 @@ model Project {
   website         String
   // tokenAvatar     String  // TODO: see how do we implement this
   status          ProjectStatus @default(PENDING)
+  isActive       Boolean @default(false)
 
   
 
