@@ -25,8 +25,8 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-start">
                         <h2 className="font-bold text-lg mb-1">Socials</h2>
                         <ul>
-                            <li><a href="https://twitter.com" className="hover:underline">X / Twitter</a></li>
-                            <li><a href="https://github.com" className="hover:underline">Github</a></li>
+                            <li><a href="https://twitter.com" target="_blank" className="hover:underline">X / Twitter</a></li>
+                            <li><a href="https://github.com" target="_blank" className="hover:underline">Github</a></li>
                         </ul>
                     </div>
                     <div className="flex flex-col items-start">
