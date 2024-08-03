@@ -46,9 +46,15 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col items-center mb-16 lg:mb-0">
                         <h2 className="font-bold text-lg mb-2">Powered by</h2>
                         <div className="flex gap-4">
-                            <img src="/scroll.svg" alt="Scroll" className="h-16 w-16" />
-                            <img src="/chainlink.svg" alt="Chainlink" className="h-16 w-16" />
-                            <img src="/gitcoin.svg" alt="Gitcoin" className="h-16 w-16" />
+                            <Link href="https://scroll.io/" target="_blank">
+                                <img src="/scroll.svg" alt="Scroll" className="h-16 w-16"/>
+                            </Link>
+                            <Link href="https://chain.link/" target="_blank">
+                                <img src="/chainlink.svg" alt="Chainlink" className="h-16 w-16" />
+                            </Link>
+                            <Link href="https://www.gitcoin.co/" target="_blank">
+                                <img src="/gitcoin.svg" alt="Gitcoin" className="h-16 w-16" />
+                            </Link>
                         </div>
                     </div>
                 </div>
