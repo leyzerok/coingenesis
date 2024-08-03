@@ -12,12 +12,10 @@ async function getProjects(status: ProjectStatus, isActive: boolean) {
 
   const mockProjects = projects.map((project) => {
     return {
-      id: project.id,
-      status: project.status,
-      tokenName: project.name,
       raised: 1763,
       ath: 124.0,
       marketCap: 2140956,
+      ...project,
     };
   });
 
@@ -32,12 +30,7 @@ export default async function Home() {
     <div className="border flex flex-col items-center bg-[#dcdee4]">
       <div>
         <div className="mt-12 flex justify-center items-center">
-          <Image
-            src={intro}
-            alt="coingenesis"
-            height={400}
-            width={1000}
-          />
+          <Image src={intro} alt="coingenesis" height={400} width={1000} />
         </div>
 
         <div className="mt-12 mb-12 flex justify-center items-center font-space-grotesk font-medium text-[20px] leading-[26px] text-black space-x-4">

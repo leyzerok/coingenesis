@@ -9,12 +9,10 @@ async function getProjects(status: ProjectStatus) {
 
   const mockProjects = projects.map((project) => {
     return {
-      id: project.id,
-      status: project.status,
-      tokenName: project.name,
       raised: 1763,
       ath: 124.0,
       marketCap: 2140956,
+      ...project,
     };
   });
 
@@ -26,8 +24,8 @@ export default async function Home() {
   const pendingProjects = await getProjects("PENDING");
 
   return (
-    <div className="border flex flex-col items-center bg-[#dcdee4]">       
-      <div>           
+    <div className="border flex flex-col items-center bg-[#dcdee4]">
+      <div>
         <h2 className="text-3xl text-center py-14 font-bold">
           Active Launchpads
         </h2>
