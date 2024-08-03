@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Web3Provider } from "./Web3Provider";
-import { ConnectKitButton } from "connectkit";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -19,13 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
-    <html lang="en">
-      <Web3Provider >
-        <Header />
-        <body className={inter.className}>{children}</body>
-        <Footer />
-      </Web3Provider >
-    </html>
+    <Web3Provider>
+      <html lang="en" className="h-full">
+        <head></head>
+        <body className={`${inter.className} flex flex-col min-h-screen`}>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </Web3Provider>
   );
 }

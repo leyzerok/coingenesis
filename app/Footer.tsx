@@ -1,58 +1,60 @@
-"use client";
+'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
+import logo from "/public/logo.svg";
 
-type FooterMenuLink = {
-    label: string;
-    href: string;
-  };
-  
-  export const menuLinks: FooterMenuLink[] = [
-    {
-      label: "Footer",
-      href: "/",
-    },
-    {
-      label: "Debug Contracts",
-      href: "/debug",
-    },
-  ];
-  
-  const FooterMenuLinks: React.FC = () => {
+const Footer: React.FC = () => {
     const router = useRouter();
-  
-    return (
-      <ul className="flex space-x-4">
-        {menuLinks.map(({ label, href }) => (
-          <li key={href}>
-            <button
-              type="button"
-              onClick={() => router.push(href)}
-              className="hover:bg-secondary hover:shadow-md focus:bg-secondary active:text-neutral py-1.5 px-3 text-sm rounded-full"
-            >
-              {label}
-            </button>
-          </li>
-        ))}
-      </ul>
-    );
-  };
-  
 
-  const Footer: React.FC = () => {
     return (
-      <header className="flex justify-between items-center p-4 bg-gray-100">
-        <div className="flex items-center">
-          <img src="/logo.svg" alt="Logo" className="w-12 h-12 mr-3" />
-          <h1 className="text-2xl font-bold">Footer</h1>
-        </div>
-        <nav>
-          <FooterMenuLinks />
-        </nav>
-      </header>
+        <footer className="bg-gray-100 py-4 px-8 text-sm">
+            <div className="container mx-auto flex flex-wrap justify-between items-center text-black">
+                <div className="w-full lg:w-1/3 mb-4 lg:mb-0 text-left items-start">
+                    <Image
+                        src={logo.src}
+                        alt="Logo"
+                        className=""
+                        height={20}
+                        width={150}
+                    />
+                    <p>© 2024 Starecore, Inc. All Rights Reserved.</p>
+                </div>
+                <div className="w-full lg:w-3/5 flex justify-between space-x-4">
+                    <div className="flex flex-col items-start">
+                        <h2 className="font-bold text-lg mb-1">Socials</h2>
+                        <ul>
+                            <li><a href="https://twitter.com" className="hover:underline">X / Twitter</a></li>
+                            <li><a href="https://github.com" className="hover:underline">Github</a></li>
+                        </ul>
+                    </div>
+                    <div className="flex flex-col items-start">
+                        <h2 className="font-bold text-lg mb-1">Company</h2>
+                        <ul>
+                            <li><a href="/community" className="hover:underline">Community</a></li>
+                            <li><a href="/docs" className="hover:underline">Docs</a></li>
+                        </ul>
+                    </div>
+                    <div className="flex flex-col items-start">
+                        <h2 className="font-bold text-lg mb-1">Legal</h2>
+                        <ul>
+                            <li><a href="/privacy-policy" className="hover:underline">Privacy Policy</a></li>
+                            <li><a href="/terms-of-use" className="hover:underline">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                    <div className="flex flex-col items-center mb-16 lg:mb-0">
+                        <h2 className="font-bold text-lg mb-2">Powered by</h2>
+                        <div className="flex gap-4">
+                            <img src="/scroll.svg" alt="Scroll" className="h-16 w-16" />
+                            <img src="/chainlink.svg" alt="Chainlink" className="h-16 w-16" />
+                            <img src="/gitcoin.svg" alt="Gitcoin" className="h-16 w-16" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     );
-  };
-  
-  export default Footer;
+};
+
+export default Footer;
