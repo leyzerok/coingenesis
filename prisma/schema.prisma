@@ -26,6 +26,7 @@ model Project {
   team            String?
   roadmap         String?
   tokenAddress    String?
+  txHash          String?
   imageURL        String?
  
   whitepaper      String?

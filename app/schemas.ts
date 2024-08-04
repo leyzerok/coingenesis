@@ -16,5 +16,6 @@ export const createProjectSchema = z.object({
   team: z.string().optional(),
   roadmap: z.string().optional(),
   tokenAddress: z.string().optional(),
+  txHash: z.string().optional(),
   imageURL: z.string().optional(),
 });

@@ -142,9 +142,9 @@ const Row = ({
         console.error("no token address!!");
         return;
       }
-      deployProject({ id, address: tokenAddress }); // TODO: move this to be executed after approving the transaction
+      deployProject({ id, address: tokenAddress, txHash: hash });
     }
-  }, [id, isSuccess, result.data?.result]);
+  }, [id, isSuccess, result.data?.result, hash]);
 
   return (
     <TableRow className="border-none">
