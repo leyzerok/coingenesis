@@ -146,7 +146,7 @@ const Deploy = () => {
                 <FormItem>
                   <FormLabel>Proposer</FormLabel>
                   <FormControl>
-                    <Input placeholder="0x" {...field} />
+                    <Input placeholder="" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
