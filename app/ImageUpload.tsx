@@ -47,14 +47,7 @@ const ImageUpload = (
   return (
     <div className="flex flex-col items-center">
       <input type="file" onChange={handleChange} />
-      {uploading && <p>Uploading...</p>}
-      {imageURL && (
-        <div className="mt-4">         
-          <a href={imageURL} target="_blank" rel="noopener noreferrer">
-            {imageURL}
-          </a>        
-        </div>
-      )}
+      {uploading && <p>Uploading...</p>}      
     </div>
   );
 };

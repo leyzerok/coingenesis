@@ -18,7 +18,7 @@ import { createProject } from "../actions";
 import { createProjectSchema } from "../schemas";
 import { useState } from "react";
 import { useAccount } from "wagmi";
-import ImageUpload from "../ImageUpload"; // Adjust the path as necessary
+import ImageUpload from "../ImageUpload"; 
 
 const SCORER_ID = process.env.NEXT_PUBLIC_SCORER_ID;
 const APIKEY = process.env.NEXT_PUBLIC_APIKEY;
@@ -132,7 +132,7 @@ const Deploy = () => {
                                 <FormItem>
                                     <FormLabel>ImageURL</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="0x" {...field} />
+                                        <Input placeholder="" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

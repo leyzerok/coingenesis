@@ -152,7 +152,7 @@ const Row = ({
         <Link href={`/project/${id}`}>
           <div className="flex flex-col gap-2 items-center">
             <Image
-              src={tokenPlaceholder.src}
+              src={imageURL || tokenPlaceholder.src}
               alt="token logo"
               height={63}
               width={63}
