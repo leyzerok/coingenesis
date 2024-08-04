@@ -7,7 +7,8 @@ const Attestation: React.FC = () => {
         <h1 className="text-4xl font-bold mb-4">
           Certified Deployer Attestation
         </h1>
-        <p className="text-lg mb-8">
+        <p className="text-lg mb-8 text-start ml-6">
+        
           Certified Deployer Attestation is an exclusive badge awarded to
           individuals or corporates who have successfully launched more than
           three tokens on the CoinGenesis Launchpad Platform. This certification
@@ -15,6 +16,7 @@ const Attestation: React.FC = () => {
           process, making these deployers more attractive to investors and
           partners. The certification not only recognizes their proven track
           record but also enhances their credibility within the community.
+          
         </p>
         <h1 className="text-4xl font-bold mb-4">Eligibility Criteria</h1>
         <ul className="list-disc text-left text-lg mb-8 ml-6 space-y-4">

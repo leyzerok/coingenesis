@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useAccount } from "wagmi";
 import { adminAddresses } from "./consts";
+import { ConnectButton } from "./ConnectButton";
 
 const Header: React.FC = () => {
     const { address } = useAccount();
@@ -70,7 +71,8 @@ const Header: React.FC = () => {
                 </NavigationMenuList>
             </NavigationMenu>
             <div className="flex flex-col">
-                <ConnectKitButton />
+                <ConnectButton                 
+                />
                 {address && adminAddresses.includes(address) && (
                     <Link href="/admin">Admin</Link>
                 )}
