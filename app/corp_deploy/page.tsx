@@ -154,7 +154,7 @@ const Deploy = () => {
                             defaultValue={"CORPORATION"}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Humanity Score</FormLabel>
+                                    <FormLabel>Proposal type</FormLabel>
                                     <FormControl>
                                         <Input placeholder="0" {...field} />
                                     </FormControl>
