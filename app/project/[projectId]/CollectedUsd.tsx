@@ -27,7 +27,7 @@ export const CollectedUsd = ({ tokenAddress }: CollectedUsdProps) => {
         {isLoading ? (
           <FiLoader className="animate-spin" />
         ) : collectedUsd && typeof collectedUsd === "bigint" ? (
-          (collectedUsd / BigInt("100000000000000000000")).toString()
+          (collectedUsd / BigInt("1000000000000000000")).toString()
         ) : (
           "0"
         )}{" "}
