@@ -23,7 +23,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { contractAddress } from "./consts";
 import { FiLoader } from "react-icons/fi";
 
@@ -52,6 +52,7 @@ const Row = ({
     error,
     isSuccess,
   } = useWriteContract();
+  const [isLoadingReject, setIsLoadingReject] = useState(false);
 
   // TODO: show toast when submitted or error
 
@@ -158,6 +159,7 @@ const Row = ({
   };
 
   const handleReject = async () => {
+    setIsLoadingReject(true);
     await rejectProject(id);
     router.refresh();
   };
@@ -191,29 +193,36 @@ const Row = ({
       </TableCell>
 
       <TableCell className="text-right text-lg">
-        {isLoadingTokenData ? (
-          <FiLoader className="animate-spin" />
-        ) : (
-          (tokenData as unknown[]) &&
-          // @ts-ignore
-          formatRaisedEth(tokenData[0])
-        )}{" "}
-        ETH
+        <div className="flex gap-1 items-center">
+          {isLoadingTokenData ? (
+            <FiLoader className="animate-spin" />
+          ) : (tokenData as unknown[]) &&
+            // @ts-ignore
+            tokenData[0] > 0 ? (
+            // @ts-ignore
+            formatRaisedEth(tokenData[0])
+          ) : (
+            "0"
+          )}{" "}
+          ETH
+        </div>
       </TableCell>
 
       <TableCell className="text-center text-lg">Coming soon...</TableCell>
 
       <TableCell className="text-right text-lg">
-        {isLoadingCollectedUsd ? (
-          <FiLoader className="animate-spin" />
-        ) : collectedUsd &&
-          typeof collectedUsd === "bigint" &&
-          collectedUsd > 0 ? (
-          collectedUsd.toString()
-        ) : (
-          "0"
-        )}{" "}
-        USD
+        <div className="flex gap-1 items-center">
+          {isLoadingCollectedUsd ? (
+            <FiLoader className="animate-spin" />
+          ) : collectedUsd &&
+            typeof collectedUsd === "bigint" &&
+            collectedUsd > 0 ? (
+            collectedUsd.toString()
+          ) : (
+            "0"
+          )}{" "}
+          USD
+        </div>
       </TableCell>
 
       {status === "PENDING" && (
@@ -221,7 +230,7 @@ const Row = ({
           <div className="flex gap-1">
             <Button
               onClick={handleDeploy}
-              disabled={isPending}
+              disabled={isPending || isLoadingReject}
               className="flex gap-2"
             >
               Deploy
@@ -230,9 +239,11 @@ const Row = ({
             <Button
               variant="destructive"
               onClick={handleReject}
-              disabled={isPending}
+              disabled={isPending || isLoadingReject}
+              className="flex gap-2"
             >
               Reject
+              {isLoadingReject && <FiLoader className="animate-spin" />}
             </Button>
           </div>
         </TableCell>

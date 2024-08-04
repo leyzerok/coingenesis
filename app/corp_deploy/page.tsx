@@ -114,7 +114,7 @@ const Deploy = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mb-10">
       <h2 className="text-3xl text-center py-14 font-bold">
         Token Deploy Proposal
       </h2>
@@ -317,6 +317,29 @@ const Deploy = () => {
 
             <ImageUpload setUrl={setUrl} />
 
+            <div className="border border-black rounded-xl p-5 max-w-4xl min-w-[700px] m-5">
+              <p className="text-center">
+                Proof of Humanity via Gitcoin Passport
+              </p>
+              <div className="items-center justify-between flex p-5 gap-8">
+                {point !== undefined && (
+                  <>
+                    <div className="grid grid-cols-4 items-center rounded border border-gray-400 w-full h-max pb-2 pt-2">
+                      <p className="w-full text-center">{point}</p>
+                    </div>
+                  </>
+                )}
+
+                <Button
+                  onClick={verifyGitcoinScore}
+                  type="button"
+                  className="w-full bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition"
+                >
+                  Verify Score
+                </Button>
+              </div>
+            </div>
+
             <div className="flex w-full justify-center">
               <Button
                 disabled={point === undefined || point <= 0}
@@ -328,26 +351,6 @@ const Deploy = () => {
             </div>
           </form>
         </Form>
-      </div>
-
-      <div className="border border-black rounded-xl p-5 max-w-4xl min-w-[700px] m-5">
-        <p className="text-center">Proof of Humanity via Gitcoin Passport</p>
-        <div className="items-center justify-between flex p-5 gap-8">
-          {point !== undefined && (
-            <>
-              <div className="grid grid-cols-4 items-center rounded border border-gray-400 w-full h-max pb-2 pt-2">
-                <p className="w-full text-center">{point}</p>
-              </div>
-            </>
-          )}
-
-          <Button
-            onClick={verifyGitcoinScore}
-            className="w-full bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition"
-          >
-            Verify Score
-          </Button>
-        </div>
       </div>
     </div>
   );
