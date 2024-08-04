@@ -130,9 +130,8 @@ const Deploy = () => {
               defaultValue={address}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>ImageURL</FormLabel>
                   <FormControl>
-                    <Input placeholder="" {...field} />
+                    <Input placeholder="" {...field} type="hidden" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -144,9 +143,8 @@ const Deploy = () => {
               defaultValue={address}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Proposer</FormLabel>
                   <FormControl>
-                    <Input placeholder="0x" {...field} />
+                    <Input placeholder="0x" {...field} type="hidden" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -158,9 +156,8 @@ const Deploy = () => {
               defaultValue={point?.toString()}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Humanity Score</FormLabel>
                   <FormControl>
-                    <Input placeholder="0" {...field} />
+                    <Input placeholder="0" {...field} type="hidden" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -172,9 +169,8 @@ const Deploy = () => {
               defaultValue={"INDIVIDUAL"}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Proposal type</FormLabel>
                   <FormControl>
-                    <Input placeholder="0" {...field} />
+                    <Input placeholder="0" {...field} type="hidden" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
