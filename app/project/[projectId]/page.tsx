@@ -47,9 +47,8 @@ const Project = async ({ params }: Params) => {
             </span>
           </div>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1 w-full">
           <BuyButton tokenAddress={project.tokenAddress} />
-          <Button>Sell</Button>
         </div>
         <Link href={project.website}>
           <div className="flex items-center mt-2">
