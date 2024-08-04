@@ -27,7 +27,7 @@ export default async function Home() {
   const endedProjects = await getProjects("DEPLOYED", false);
 
   return (
-    <div className="border flex flex-col items-center bg-[#dcdee4]">
+    <div className="border flex flex-col items-center">
       <div>
         <div className="mt-12 flex justify-center items-center">
           <Image src={intro} alt="coingenesis" height={400} width={1000} />

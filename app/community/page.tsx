@@ -6,7 +6,7 @@ import frame_banana from '/public/frame_banana.svg';
 
 const Community: React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-[#dcdee4] p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <h1 className="text-4xl font-bold mb-16 mt-8">Community</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-16 gap-x-0 max-w-5xl">
                 <div className="text-center lg:text-left order-2 lg:order-1">
