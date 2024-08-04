@@ -40,12 +40,24 @@ const Project = async ({ params }: Params) => {
             width={120}
             alt="Token logo"
           />
-          <div className="flex flex-col">
-            <span className="text-lg font-bold">{project.name}</span>
-            <span className="text-gray-700 font-semibold">
-              ${project.symbol}
-            </span>
-          </div>
+          {project.txHash ? (
+            <Link
+              href={`https://sepolia.scrollscan.com/tx/${project.txHash}`}
+              className="flex flex-col"
+            >
+              <span className="text-lg font-bold">{project.name}</span>
+              <span className="text-gray-700 font-semibold">
+                ${project.symbol}
+              </span>
+            </Link>
+          ) : (
+            <div className="flex flex-col">
+              <span className="text-lg font-bold">{project.name}</span>
+              <span className="text-gray-700 font-semibold">
+                ${project.symbol}
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-3 w-full">
           <BuyButton tokenAddress={project.tokenAddress} />
