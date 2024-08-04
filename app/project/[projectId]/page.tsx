@@ -35,7 +35,7 @@ const Project = async ({ params }: Params) => {
       <div className="flex flex-col gap-2 sticky top-0 pt-4">
         <div className="flex gap-4 items-center">
           <Image
-            src={tokenPlaceholder.src}
+            src={project.imageURL || tokenPlaceholder.src}
             height={120}
             width={120}
             alt="Token logo"
