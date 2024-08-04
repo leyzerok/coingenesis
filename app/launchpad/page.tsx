@@ -21,7 +21,7 @@ async function getProjects(status: ProjectStatus) {
 
 export default async function Home() {
   const deployedProjects = await getProjects("DEPLOYED");
-  const pendingProjects = await getProjects("PENDING");
+  const pendingProjects = await getProjects("ACCEPTED");
 
   return (
     <div className="border flex flex-col items-center w-full">
@@ -36,7 +36,7 @@ export default async function Home() {
         <h2 className="text-3xl text-center py-14 font-bold">
           Ended Launchpads
         </h2>
-        <LaunchpadTable items={pendingProjects} showActions />
+        <LaunchpadTable items={pendingProjects} />
       </div>
     </div>
   );
