@@ -12,10 +12,10 @@ const TokenDeploy = () => {
                 {/* first frame */}
                 <div className="flex flex-col justify-between text-2xl w-1/3 border border-black rounded-xl p-5">
                     <div className="flex flex-col h-full">
-                        <div className="flex justify-center items-center text-2xl mb-8">
+                        <div className="flex justify-center items-center text-2xl mb-4">
                             Individual Deploy Proposal
                         </div>
-                        <h1 className="text-lg mb-4 ml-8">Required:</h1>
+                        <h1 className="text-lg mb-2 ml-2">Required:</h1>
                         <ul className="list-disc text-left text-lg mb-8 ml-8 space-y-4">
                             <li>Name</li>
                             <li>Symbol</li>
