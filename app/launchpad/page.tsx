@@ -24,15 +24,15 @@ export default async function Home() {
   const pendingProjects = await getProjects("PENDING");
 
   return (
-    <div className="border flex flex-col items-center">
-      <div>
+    <div className="border flex flex-col items-center w-full">
+      <div className="w-full max-w-5xl">
         <h2 className="text-3xl text-center py-14 font-bold">
           Active Launchpads
         </h2>
         <LaunchpadTable items={deployedProjects} />
       </div>
 
-      <div className="mt-11  mb-12">
+      <div className="mt-11  mb-12 w-full max-w-5xl">
         <h2 className="text-3xl text-center py-14 font-bold">
           Ended Launchpads
         </h2>

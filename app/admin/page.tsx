@@ -18,7 +18,7 @@ const Admin = async () => {
   const pendingProjects = await getProjects();
 
   return (
-    <div className="border flex flex-col items-center">
+    <div className="flex flex-col items-center w-full max-w-5xl mx-auto">
       <h2 className="text-3xl text-center py-14 font-bold">Pending review</h2>
       <LaunchpadTable items={pendingProjects} />
     </div>
