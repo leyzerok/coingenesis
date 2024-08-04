@@ -46,10 +46,10 @@ export const createProject = async (formData: FormData) => {
         humanityScore: parseFloat(humanityScore),
       },
     });
-
-    redirect("/"); // TODO: redirect to the new project... and it isn't working
   } catch (error) {
     console.log("🚀 ~ createProject ~ error:", error);
+  } finally {
+    redirect("/");
   }
 };
 
