@@ -34,6 +34,7 @@ const headers = APIKEY
 const Deploy = () => {
   const [point, setPoint] = useState<number | undefined>(undefined);
   const { address } = useAccount();
+  const [isVerifyingGitcoin, setIsVerifyingGitcoin] = useState(false);
 
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
@@ -45,6 +46,7 @@ const Deploy = () => {
   });
 
   async function verifyGitcoinScore() {
+    setIsVerifyingGitcoin(true);
     await signGitcoin();
     console.log(address);
     if (address === undefined) {
@@ -58,6 +60,7 @@ const Deploy = () => {
     let pointForWallet = await getPassportScore(address);
     setPoint(pointForWallet);
     form.setValue("humanityScore", pointForWallet?.toString() || "0");
+    setIsVerifyingGitcoin(false);
   }
 
   async function signGitcoin() {
