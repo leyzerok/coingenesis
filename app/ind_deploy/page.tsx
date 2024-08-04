@@ -38,6 +38,7 @@ const Deploy = () => {
         defaultValues: {
             proposer: address as `0x${string}`,
             humanityScore: point?.toString() || "0",
+            launchType: "INDIVIDUAL",
         },
     });
 
