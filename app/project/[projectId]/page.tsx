@@ -44,6 +44,7 @@ const Project = async ({ params }: Params) => {
             <Link
               href={`https://sepolia.scrollscan.com/tx/${project.txHash}`}
               className="flex flex-col"
+              target="_blank"
             >
               <span className="text-lg font-bold">{project.name}</span>
               <span className="text-gray-700 font-semibold">
@@ -65,21 +66,21 @@ const Project = async ({ params }: Params) => {
         </div>
 
         <div className="flex flex-col gap-1 mt-6">
-          <Link href={project.website}>
+          <Link href={project.website} target="_blank">
             <div className="flex items-center gap-2 text-gray-600">
               <TbWorld />
               {project.website}
             </div>
           </Link>
 
-          <Link href={project.discord}>
+          <Link href={project.discord} target="_blank">
             <div className="flex items-center gap-2 text-gray-600">
               <FaDiscord />
               {project.discord}
             </div>
           </Link>
 
-          <Link href={project.twitter}>
+          <Link href={project.twitter} target="_blank">
             <div className="flex items-center gap-2 text-gray-600">
               <FaTwitter />
               {project.twitter}
@@ -87,7 +88,7 @@ const Project = async ({ params }: Params) => {
           </Link>
 
           {project.whitepaper && (
-            <Link href={project.whitepaper}>
+            <Link href={project.whitepaper} target="_blank">
               <div className="flex items-center gap-2 text-gray-600">
                 <FaScroll />
                 {project.whitepaper}
