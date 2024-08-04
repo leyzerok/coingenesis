@@ -19,6 +19,7 @@ import { createProjectSchema } from "../schemas";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import ImageUpload from "../ImageUpload";
+import { FiLoader } from "react-icons/fi";
 
 const SCORER_ID = process.env.NEXT_PUBLIC_SCORER_ID;
 const APIKEY = process.env.NEXT_PUBLIC_APIKEY;
@@ -33,6 +34,7 @@ const headers = APIKEY
 const Deploy = () => {
   const [point, setPoint] = useState<number | undefined>(undefined);
   const { address } = useAccount();
+  const [isVerifyingGitcoin, setIsVerifyingGitcoin] = useState(false);
 
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
@@ -44,6 +46,7 @@ const Deploy = () => {
   });
 
   async function verifyGitcoinScore() {
+    setIsVerifyingGitcoin(true);
     await signGitcoin();
     console.log(address);
     if (address === undefined) {
@@ -57,6 +60,7 @@ const Deploy = () => {
     let pointForWallet = await getPassportScore(address);
     setPoint(pointForWallet);
     form.setValue("humanityScore", pointForWallet?.toString() || "0");
+    setIsVerifyingGitcoin(false);
   }
 
   async function signGitcoin() {
@@ -303,10 +307,12 @@ const Deploy = () => {
 
                 <Button
                   onClick={verifyGitcoinScore}
+                  disabled={isVerifyingGitcoin}
                   type="button"
-                  className="w-full bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition"
+                  className="w-full bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition flex gap-1"
                 >
                   Verify Score
+                  {isVerifyingGitcoin && <FiLoader className="animate-spin" />}
                 </Button>
               </div>
             </div>
