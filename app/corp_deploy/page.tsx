@@ -34,7 +34,7 @@ const headers = APIKEY
 const Deploy = () => {
   const [point, setPoint] = useState<number | undefined>(undefined);
   const { address } = useAccount();
-  const [isVerifyingGitcoin, setIsVerifyingGitcoin] = useState(false);
+  const [imageURL, setImageURL] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
@@ -46,7 +46,6 @@ const Deploy = () => {
   });
 
   async function verifyGitcoinScore() {
-    setIsVerifyingGitcoin(true);
     await signGitcoin();
     console.log(address);
     if (address === undefined) {
@@ -55,11 +54,10 @@ const Deploy = () => {
     }
     let address1 =
       "0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1" as `0x${string}`; // address verified to be a human
-    await sendPassportToScorer(address1);
-    let pointForWallet = await getPassportScore(address1);
+    await sendPassportToScorer(address);
+    let pointForWallet = await getPassportScore(address);
     setPoint(pointForWallet);
     form.setValue("humanityScore", pointForWallet?.toString() || "0");
-    setIsVerifyingGitcoin(false);
   }
 
   async function signGitcoin() {
@@ -123,7 +121,9 @@ const Deploy = () => {
       </h2>
 
       <div className="border border-black rounded-xl p-5 max-w-4xl min-w-[700px]">
-        <div className="text-center">Corporate Deploy Proposal</div>
+        <div className="text-center text-lg font-semibold -mb-8 my-2">
+          Corporate Deploy Proposal
+        </div>
         <Form {...form}>
           <form className="flex flex-col gap-4" action={createProject}>
             {/* HIDDEN FIELDS */}
