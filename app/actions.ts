@@ -51,14 +51,19 @@ export const createProject = async (formData: FormData) => {
   }
 };
 
-export const deployProject = async (id: string) => {
+interface DeployProjectArgs {
+  id: string;
+  address: string;
+}
+
+export const deployProject = async ({ id, address }: DeployProjectArgs) => {
   // deploy the token
   // TODO: deployment
   // if successful, mark it as "DEPLOYED"
   const prisma = new PrismaClient();
   await prisma.project.update({
     where: { id },
-    data: { status: "DEPLOYED", isActive: true },
+    data: { status: "DEPLOYED", isActive: true, tokenAddress: address },
   });
 };
 

@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
 import tokenPlaceholder from "/public/token-logo-placeholder.png";
 import { Button } from "@/components/ui/button";
 import { TbWorld } from "react-icons/tb";
 import Link from "next/link";
+import { BuyButton } from "./BuyButton";
 
 const getProject = async (id: string) => {
   const prisma = new PrismaClient();
@@ -48,7 +48,7 @@ const Project = async ({ params }: Params) => {
           </div>
         </div>
         <div className="flex gap-1">
-          <Button>Buy</Button>
+          <BuyButton tokenAddress={project.tokenAddress} />
           <Button>Sell</Button>
         </div>
         <Link href={project.website}>

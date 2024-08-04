@@ -25,6 +25,7 @@ model Project {
   launchType      LaunchType
   team            String?
   roadmap         String?
+  tokenAddress    String?
  
   whitepaper      String?
 

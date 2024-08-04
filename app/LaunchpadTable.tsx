@@ -12,11 +12,12 @@ import tokenPlaceholder from "/public/token-logo-placeholder.png";
 import Image from "next/image";
 import { deployProject, rejectProject } from "./actions";
 import { Button } from "@/components/ui/button";
-import { Project, ProjectStatus } from "@prisma/client";
+import { Project } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { abi } from "@/abis/abi";
-import { useAccount, usePublicClient, useWriteContract } from "wagmi";
+import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
+import { useEffect } from "react";
 
 const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -43,11 +44,45 @@ const Row = ({
 }: ProjectData) => {
   const router = useRouter();
   const { address } = useAccount();
-  const { data: hash, writeContract, isPending, error } = useWriteContract();
+  const {
+    data: hash,
+    writeContract,
+    isPending,
+    error,
+    isSuccess,
+  } = useWriteContract();
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("deployed!");
+    }
+  });
 
   // TODO: show toast when submitted or error
 
   console.log("🚀 ~ error:", error);
+
+  const result = useSimulateContract({
+    address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+    abi,
+    functionName: "createToken",
+    args: [
+      {
+        name,
+        symbol,
+        twitterURL: twitter,
+        discordURL: discord,
+        websiteURL: website,
+        telegramURL: telegram,
+        imageURL: "image", // TODO
+        tokenCreator: address,
+        // this values are hardcoded for now, but will be configurable in the future
+        totalSupply: BigInt("1000000000000000000000000000"),
+        availableSupply: BigInt("800000000000000000000000000"),
+        ethTarget: BigInt("100000000000000000000"),
+      },
+    ],
+  });
 
   const handleDeploy = async () => {
     if (!address) {
@@ -55,7 +90,14 @@ const Row = ({
       return;
     }
 
-    await deployProject(id); // TODO: uncomment this
+    // @ts-ignore
+    const tokenAddress = result.data?.result;
+    if (!tokenAddress) {
+      console.log(result.queryKey);
+      return;
+    }
+
+    await deployProject({ id, address: tokenAddress }); // TODO: move this to be executed after approving the transaction
 
     console.log("starting deploy...");
     writeContract({

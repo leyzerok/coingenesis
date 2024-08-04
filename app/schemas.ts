@@ -14,5 +14,6 @@ export const createProjectSchema = z.object({
   whitepaper: z.string().optional(),
   launchType: z.nativeEnum(LaunchType),
   team: z.string().optional(),
-  roadmap: z.string().optional()
+  roadmap: z.string().optional(),
+  tokenAddress: z.string().optional(),
 });
