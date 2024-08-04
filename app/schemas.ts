@@ -1,3 +1,4 @@
+import { LaunchType } from "@prisma/client";
 import { z } from "zod";
 
 export const createProjectSchema = z.object({
@@ -11,6 +12,7 @@ export const createProjectSchema = z.object({
   proposer: z.string().length(42),
   humanityScore: z.string(),
   whitepaper: z.string().optional(),
+  launchType: z.nativeEnum(LaunchType),
   team: z.string().optional(),
   roadmap: z.string().optional()
 });

@@ -78,7 +78,7 @@ const TokenDeploy = () => {
                             <button className="bg-transparent border border-black text-black py-4 px-8 text-lg rounded-full hover:bg-black hover:text-white transition">
                                 I am a Corporate Representative
                             </button>
-                            </Link>
+                        </Link>
                     </div>
                 </div>
             </div>

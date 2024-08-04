@@ -21,6 +21,9 @@ export const createProject = async (formData: FormData) => {
       discord,
       telegram,
       proposer,
+      roadmap,
+      team,
+      launchType,
       humanityScore,
     } = createProjectSchema.parse(data);
 
@@ -35,6 +38,9 @@ export const createProject = async (formData: FormData) => {
         discord,
         telegram,
         proposer,
+        roadmap,
+        team,
+        launchType,
         humanityScore: parseFloat(humanityScore),
       },
     });
