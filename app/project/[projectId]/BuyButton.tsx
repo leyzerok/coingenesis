@@ -61,7 +61,7 @@ export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
         {isLoading ? (
           <FiLoader className="animate-spin" />
         ) : tokens && typeof tokens === "bigint" ? (
-          (tokens / BigInt("100000000000000000000")).toString()
+          (tokens / BigInt("1000000000000000000")).toString()
         ) : (
           "0"
         )}{" "}
