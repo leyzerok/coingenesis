@@ -119,7 +119,7 @@ const Row = ({
           // this values are hardcoded for now, but will be configurable in the future
           totalSupply: BigInt("1000000000000000000000000000"),
           availableSupply: BigInt("800000000000000000000000000"),
-          ethTarget: BigInt("100000000000000000000"),
+          ethTarget: BigInt("1000000000000000000"),
         },
       ],
     });
