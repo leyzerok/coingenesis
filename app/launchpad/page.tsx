@@ -24,7 +24,7 @@ export default async function Home() {
   const pendingProjects = await getProjects("PENDING");
 
   return (
-    <div className="border flex flex-col items-center bg-[#dcdee4]">
+    <div className="border flex flex-col items-center">
       <div>
         <h2 className="text-3xl text-center py-14 font-bold">
           Active Launchpads

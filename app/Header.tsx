@@ -85,12 +85,12 @@ const components: { title: string; href: string; description: string }[] = [
     {
         title: "Certified Deployer Attestation",
         href: "/attestation",
-        description: "Certify your deployer status",
+        description: "Learn more about how to get certified",
     },
     {
         title: "Community",
         href: "/community",
-        description: "Join the community",
+        description: "Find out about the latest community updates",
     },
     {
         title: "Documentation",
