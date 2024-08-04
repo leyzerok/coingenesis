@@ -13,8 +13,6 @@ interface BuyButtonProps {
   tokenAddress: string | null;
 }
 
-8000000000000000000000;
-
 export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
   const [ethValue, setEthValue] = useState("");
   const { writeContract, error, isPending, isSuccess } = useWriteContract();
@@ -25,11 +23,6 @@ export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
     functionName: "getAmountOut",
     args: [tokenAddress, parseEther(ethValue)],
   });
-
-  console.log(typeof tokens);
-  if (typeof tokens === "bigint") {
-    console.log(BigInt(tokens).toString());
-  }
 
   useEffect(() => {
     if (isSuccess) setEthValue("");
@@ -62,7 +55,7 @@ export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
       <Button
         onClick={buyToken}
         disabled={!tokenAddress || isPending}
-        className="w-full flex gap-2"
+        className="w-full flex gap-2 items-center"
       >
         Buy{" "}
         {isLoading ? (
