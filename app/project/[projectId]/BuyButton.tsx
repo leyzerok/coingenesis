@@ -5,7 +5,9 @@ import { parseEther } from "viem";
 import { abi } from "@/abis/abi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { contractAddress } from "@/app/consts";
+import { FiLoader } from "react-icons/fi";
 
 interface BuyButtonProps {
   tokenAddress: string | null;
@@ -13,13 +15,17 @@ interface BuyButtonProps {
 
 export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
   const [ethValue, setEthValue] = useState("");
-  const { writeContract, error } = useWriteContract();
+  const { writeContract, error, isPending, isSuccess } = useWriteContract();
+
+  useEffect(() => {
+    if (isSuccess) setEthValue("");
+  }, [isSuccess]);
 
   if (error) console.error(error);
 
   const buyToken = async () => {
     writeContract({
-      address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+      address: contractAddress,
       abi,
       functionName: "buyToken",
       args: [
@@ -39,9 +45,15 @@ export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
         value={ethValue}
         onChange={(e) => setEthValue(e.target.value)}
         placeholder="0.001"
+        disabled={isPending}
       />
-      <Button onClick={buyToken} disabled={!tokenAddress} className="w-full">
+      <Button
+        onClick={buyToken}
+        disabled={!tokenAddress || isPending}
+        className="w-full flex gap-2"
+      >
         Buy
+        {isPending && <FiLoader className="animate-spin" />}
       </Button>
     </div>
   );
