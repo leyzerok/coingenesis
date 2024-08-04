@@ -11,16 +11,7 @@ async function getProjects() {
     where: { status: "PENDING" },
   });
 
-  const mockProjects = projects.map((project) => {
-    return {
-      raised: 1763,
-      ath: 124.0,
-      marketCap: 2140956,
-      ...project,
-    };
-  });
-
-  return mockProjects;
+  return projects;
 }
 
 const Admin = async () => {

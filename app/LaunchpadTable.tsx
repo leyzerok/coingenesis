@@ -18,6 +18,7 @@ import Link from "next/link";
 import { abi } from "@/abis/abi";
 import {
   useAccount,
+  useReadContract,
   useSimulateContract,
   useWaitForTransactionReceipt,
   useWriteContract,
@@ -30,26 +31,18 @@ const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-interface ProjectData extends Project {
-  raised: number;
-  ath: number;
-  marketCap: number;
-}
-
 const Row = ({
   id,
   symbol,
   status,
   website,
   name,
-  raised,
-  ath,
-  marketCap,
   discord,
   telegram,
   twitter,
   imageURL,
-}: ProjectData) => {
+  tokenAddress,
+}: Project) => {
   const router = useRouter();
   const { address } = useAccount();
   const {
@@ -65,6 +58,41 @@ const Row = ({
   if (error) {
     console.log("🚀 ~ error:", error);
   }
+
+  const { data: tokenData, isLoading: isLoadingTokenData } = useReadContract({
+    abi,
+    address: contractAddress,
+    functionName: "tokens",
+    args: [tokenAddress],
+  });
+
+  const formatRaisedEth = (value: bigint | undefined): string => {
+    if (typeof value !== "bigint" || value <= 0) {
+      return "0.0000";
+    }
+
+    // Use 10^18 as the divisor since ETH has 18 decimal places
+    const divisor = BigInt("1000000000000000000"); // 10^18
+    const fractionalPart = (value * BigInt(10000)) / divisor; // Multiply by 10000 to get 4 decimal places
+
+    // Format to 4 decimal places
+    const formattedValue = fractionalPart.toString().padStart(5, "0");
+    const integerPart = formattedValue.slice(0, -4);
+    const decimalPart = formattedValue.slice(-4);
+
+    // Combine and remove trailing zeros, but always show at least one decimal place
+    return `${integerPart || "0"}.${decimalPart}`.replace(/\.?0+$/, (match) =>
+      match.includes(".") ? ".0" : ""
+    );
+  };
+
+  const { data: collectedUsd, isLoading: isLoadingCollectedUsd } =
+    useReadContract({
+      abi,
+      address: contractAddress,
+      functionName: "getCollectedUSD",
+      args: [tokenAddress],
+    });
 
   const result = useSimulateContract({
     address: contractAddress,
@@ -148,7 +176,7 @@ const Row = ({
 
   return (
     <TableRow className="border-none">
-      <TableCell className="font-medium">
+      <TableCell className="font-medium text-center">
         <Link href={`/project/${id}`}>
           <div className="flex flex-col gap-2 items-center">
             <Image
@@ -163,13 +191,29 @@ const Row = ({
       </TableCell>
 
       <TableCell className="text-right text-lg">
-        {formatNumber(raised)} ETH
+        {isLoadingTokenData ? (
+          <FiLoader className="animate-spin" />
+        ) : (
+          (tokenData as unknown[]) &&
+          // @ts-ignore
+          formatRaisedEth(tokenData[0])
+        )}{" "}
+        ETH
       </TableCell>
 
-      <TableCell className="text-lg">{ath} x</TableCell>
+      <TableCell className="text-center text-lg">Coming soon...</TableCell>
 
       <TableCell className="text-right text-lg">
-        {formatNumber(marketCap)} USD
+        {isLoadingCollectedUsd ? (
+          <FiLoader className="animate-spin" />
+        ) : collectedUsd &&
+          typeof collectedUsd === "bigint" &&
+          collectedUsd > 0 ? (
+          collectedUsd.toString()
+        ) : (
+          "0"
+        )}{" "}
+        USD
       </TableCell>
 
       {status === "PENDING" && (
@@ -199,7 +243,7 @@ const Row = ({
 };
 
 interface LaunchPadTableProps {
-  items: ProjectData[];
+  items: Project[];
   showActions?: boolean;
 }
 
@@ -212,10 +256,10 @@ export const LaunchpadTable = ({
       <Table className="border border-black">
         <TableHeader>
           <TableRow className="border border-black">
-            <TableHead>Token</TableHead>
-            <TableHead>Raised</TableHead>
-            <TableHead>ATH</TableHead>
-            <TableHead className="text-right">Market Cap</TableHead>
+            <TableHead className="text-center">Token</TableHead>
+            <TableHead className="text-right">Raised</TableHead>
+            <TableHead className="text-center">Market Cap</TableHead>
+            <TableHead className="text-right">Collected</TableHead>
             {showActions && <TableHead>Admin</TableHead>}
           </TableRow>
         </TableHeader>
