@@ -14,6 +14,7 @@ export const createProject = async (formData: FormData) => {
     const {
       name,
       symbol,
+      imageURL,
       description,
       website,
       whitepaper,
@@ -30,6 +31,7 @@ export const createProject = async (formData: FormData) => {
     await prisma.project.create({
       data: {
         name,
+        imageURL,
         symbol,
         description,
         website,

@@ -9,7 +9,7 @@ export const createProjectSchema = z.object({
   twitter: z.string().url(),
   discord: z.string().url(),
   telegram: z.string(),
-  proposer: z.string().length(42),
+  proposer: z.string(),
   humanityScore: z.string(),
   whitepaper: z.string().optional(),
   launchType: z.nativeEnum(LaunchType),
@@ -17,4 +17,5 @@ export const createProjectSchema = z.object({
   roadmap: z.string().optional(),
   tokenAddress: z.string().optional(),
   txHash: z.string().optional(),
+  imageURL: z.string().optional(),
 });

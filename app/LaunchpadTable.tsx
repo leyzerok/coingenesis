@@ -48,6 +48,7 @@ const Row = ({
   discord,
   telegram,
   twitter,
+  imageURL,
 }: ProjectData) => {
   const router = useRouter();
   const { address } = useAccount();
@@ -77,7 +78,7 @@ const Row = ({
         discordURL: discord,
         websiteURL: website,
         telegramURL: telegram,
-        imageURL: "image", // TODO
+        imageURL: imageURL,
         tokenCreator: address,
         // this values are hardcoded for now, but will be configurable in the future
         totalSupply: BigInt("1000000000000000000000000000"),
@@ -113,7 +114,7 @@ const Row = ({
           discordURL: discord,
           websiteURL: website,
           telegramURL: telegram,
-          imageURL: "image", // TODO
+          imageURL: imageURL,
           tokenCreator: address,
           // this values are hardcoded for now, but will be configurable in the future
           totalSupply: BigInt("1000000000000000000000000000"),
