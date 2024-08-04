@@ -192,8 +192,8 @@ const Row = ({
         </Link>
       </TableCell>
 
-      <TableCell className="text-right text-lg">
-        <div className="flex gap-1 items-center">
+      <TableCell className="text-lg">
+        <div className="flex gap-1 items-center justify-end">
           {isLoadingTokenData ? (
             <FiLoader className="animate-spin" />
           ) : (tokenData as unknown[]) &&
@@ -210,8 +210,8 @@ const Row = ({
 
       <TableCell className="text-center text-lg">Coming soon...</TableCell>
 
-      <TableCell className="text-right text-lg">
-        <div className="flex gap-1 items-center">
+      <TableCell className="text-lg">
+        <div className="flex gap-1 items-center justify-end">
           {isLoadingCollectedUsd ? (
             <FiLoader className="animate-spin" />
           ) : collectedUsd &&
