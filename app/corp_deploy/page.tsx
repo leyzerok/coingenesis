@@ -148,7 +148,20 @@ const Deploy = () => {
                                 </FormItem>
                             )}
                         />
-
+                        <FormField
+                            control={form.control}
+                            name="launchType"
+                            defaultValue={"CORPORATION"}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Humanity Score</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="0" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         {/* NORMAL FIELDS */}
                         <FormField
                             control={form.control}
