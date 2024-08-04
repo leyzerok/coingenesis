@@ -5,6 +5,27 @@ export const abi = [
     type: "constructor",
   },
   {
+    inputs: [],
+    name: "AccessControlBadConfirmation",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        internalType: "bytes32",
+        name: "neededRole",
+        type: "bytes32",
+      },
+    ],
+    name: "AccessControlUnauthorizedAccount",
+    type: "error",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -28,6 +49,11 @@ export const abi = [
   },
   {
     inputs: [],
+    name: "DeadlineExpired",
+    type: "error",
+  },
+  {
+    inputs: [],
     name: "EthTransferFailed",
     type: "error",
   },
@@ -38,7 +64,12 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "InvalidAllocationPercent",
+    name: "InvalidAvailableAllocation",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InvalidEthTarget",
     type: "error",
   },
   {
@@ -48,7 +79,12 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "InvalidReserve",
+    name: "InvalidSupply",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "LaunchNotFinished",
     type: "error",
   },
   {
@@ -58,39 +94,12 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "NotEnoughAmountOut",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NotEnoughETHBalance",
-    type: "error",
-  },
-  {
-    inputs: [],
     name: "NotEnoughTokenSupply",
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-    ],
-    name: "OwnableInvalidOwner",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "OwnableUnauthorizedAccount",
+    inputs: [],
+    name: "NotTokenOwner",
     type: "error",
   },
   {
@@ -111,12 +120,22 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "TransactionOutdated",
+    name: "TokenAlreadyListed",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "TokenDoesntExist",
     type: "error",
   },
   {
     inputs: [],
     name: "ZeroAddress",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ZeroDexRouter",
     type: "error",
   },
   {
@@ -154,6 +173,19 @@ export const abi = [
     inputs: [
       {
         indexed: false,
+        internalType: "address",
+        name: "newRouter",
+        type: "address",
+      },
+    ],
+    name: "DexRouterUpdates",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
         internalType: "uint256",
         name: "newFeeRate",
         type: "uint256",
@@ -166,19 +198,88 @@ export const abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: "address",
+        name: "newPriceFee",
+        type: "address",
+      },
+    ],
+    name: "PriceFeeUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "previousAdminRole",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "newAdminRole",
+        type: "bytes32",
+      },
+    ],
+    name: "RoleAdminChanged",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
         indexed: true,
         internalType: "address",
-        name: "previousOwner",
+        name: "account",
         type: "address",
       },
       {
         indexed: true,
         internalType: "address",
-        name: "newOwner",
+        name: "sender",
         type: "address",
       },
     ],
-    name: "OwnershipTransferred",
+    name: "RoleGranted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+    ],
+    name: "RoleRevoked",
     type: "event",
   },
   {
@@ -211,6 +312,32 @@ export const abi = [
     ],
     name: "TokenCreated",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "DEFAULT_ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "DEPLOYER_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
@@ -346,108 +473,51 @@ export const abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "string",
-            name: "name",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "symbol",
-            type: "string",
-          },
-          {
-            internalType: "uint256",
-            name: "totalSupply",
-            type: "uint256",
-          },
-          {
-            internalType: "string",
-            name: "twitterURL",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "discordURL",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "websiteURL",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "telegramURL",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "imageURL",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "tokenCreator",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "availableSupply",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "ethTarget",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct IGenesisFactory.TokenDeployment",
-        name: "_tokenInfo",
-        type: "tuple",
-      },
-      {
-        internalType: "uint32",
-        name: "_deadline",
-        type: "uint32",
-      },
-    ],
-    name: "createTokenWithBuy",
+    inputs: [],
+    name: "feeRate",
     outputs: [
       {
-        internalType: "address",
+        internalType: "uint256",
         name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "devs",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [],
-    name: "feeRate",
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_ethAmountIn",
+        type: "uint256",
+      },
+    ],
+    name: "getAmountOut",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+    ],
+    name: "getCollectedUSD",
     outputs: [
       {
         internalType: "uint256",
@@ -480,6 +550,96 @@ export const abi = [
   {
     inputs: [
       {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+    ],
+    name: "getRoleAdmin",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
+      },
+    ],
+    name: "getTokenStatus",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "grantRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "hasRole",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_token",
         type: "address",
@@ -497,21 +657,19 @@ export const abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    inputs: [
       {
         internalType: "address",
-        name: "",
+        name: "_token",
         type: "address",
       },
+      {
+        internalType: "uint256",
+        name: "_deadline",
+        type: "uint256",
+      },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
+    name: "listToken",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -519,12 +677,48 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "address[]",
-        name: "array",
-        type: "address[]",
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "callerConfirmation",
+        type: "address",
       },
     ],
-    name: "setDevs",
+    name: "renounceRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "revokeRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_priceFeed",
+        type: "address",
+      },
+    ],
+    name: "setChainLinkPriceFeed",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -540,6 +734,51 @@ export const abi = [
     name: "setFeeRate",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_sushiSwapRouter",
+        type: "address",
+      },
+    ],
+    name: "setSushiSwapRouter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
+      },
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "sushiSwapRouter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -578,6 +817,11 @@ export const abi = [
         type: "uint256",
       },
       {
+        internalType: "address",
+        name: "tokenCreator",
+        type: "address",
+      },
+      {
         internalType: "bool",
         name: "isCreated",
         type: "bool",
@@ -592,39 +836,8 @@ export const abi = [
         name: "isTargetAchieved",
         type: "bool",
       },
-      {
-        internalType: "bool",
-        name: "isEthTarget",
-        type: "bool",
-      },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "withdrawEth",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
 ];

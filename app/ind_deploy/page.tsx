@@ -49,6 +49,7 @@ const Deploy = () => {
       setPoint(undefined);
       throw new Error("Wallet is not connected");
     }
+
     let address1 =
       "0x7fC78c95101D4bf54988Bb6E169E8552cA6773F1" as `0x${string}`; // address verified to be a human
     await sendPassportToScorer(address);

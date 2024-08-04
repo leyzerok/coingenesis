@@ -1,10 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import tokenPlaceholder from "/public/token-logo-placeholder.png";
-import { Button } from "@/components/ui/button";
 import { TbWorld } from "react-icons/tb";
 import Link from "next/link";
 import { BuyButton } from "./BuyButton";
+import { CollectedUsd } from "./CollectedUsd";
 
 const getProject = async (id: string) => {
   const prisma = new PrismaClient();
@@ -29,7 +29,6 @@ const Project = async ({ params }: Params) => {
     return <div>Project {params.projectId} not found</div>;
   }
 
-  console.log(params);
   return (
     <div className="flex gap-5 mx-auto items-start justify-center py-6">
       <div className="flex flex-col gap-2">
@@ -47,8 +46,9 @@ const Project = async ({ params }: Params) => {
             </span>
           </div>
         </div>
-        <div className="flex gap-1 w-full">
+        <div className="flex flex-col gap-3 w-full">
           <BuyButton tokenAddress={project.tokenAddress} />
+          <CollectedUsd tokenAddress={project.tokenAddress} />
         </div>
         <Link href={project.website}>
           <div className="flex items-center mt-2">

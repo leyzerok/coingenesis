@@ -16,8 +16,15 @@ import { Project } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { abi } from "@/abis/abi";
-import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
+import {
+  useAccount,
+  useSimulateContract,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
 import { useEffect } from "react";
+import { contractAddress } from "./consts";
+import { FiLoader } from "react-icons/fi";
 
 const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -53,18 +60,14 @@ const Row = ({
     isSuccess,
   } = useWriteContract();
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("deployed!");
-    }
-  });
-
   // TODO: show toast when submitted or error
 
-  console.log("🚀 ~ error:", error);
+  if (error) {
+    console.log("🚀 ~ error:", error);
+  }
 
   const result = useSimulateContract({
-    address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+    address: contractAddress,
     abi,
     functionName: "createToken",
     args: [
@@ -75,7 +78,7 @@ const Row = ({
         discordURL: discord,
         websiteURL: website,
         telegramURL: telegram,
-        imageURL: "image", // TODO
+        imageURL: imageURL,
         tokenCreator: address,
         // this values are hardcoded for now, but will be configurable in the future
         totalSupply: BigInt("1000000000000000000000000000"),
@@ -98,11 +101,9 @@ const Row = ({
       return;
     }
 
-    await deployProject({ id, address: tokenAddress }); // TODO: move this to be executed after approving the transaction
-
     console.log("starting deploy...");
     writeContract({
-      address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+      address: contractAddress,
       abi,
       functionName: "createToken",
       args: [
@@ -113,7 +114,7 @@ const Row = ({
           discordURL: discord,
           websiteURL: website,
           telegramURL: telegram,
-          imageURL: imageURL, // TODO
+          imageURL: imageURL,
           tokenCreator: address,
           // this values are hardcoded for now, but will be configurable in the future
           totalSupply: BigInt("1000000000000000000000000000"),
@@ -127,11 +128,23 @@ const Row = ({
 
     router.refresh();
   };
+
   const handleReject = async () => {
     await rejectProject(id);
     router.refresh();
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      // @ts-ignore
+      const tokenAddress = result.data?.result;
+      if (!tokenAddress) {
+        console.error("no token address!!");
+        return;
+      }
+      deployProject({ id, address: tokenAddress }); // TODO: move this to be executed after approving the transaction
+    }
+  }, [id, isSuccess, result.data?.result]);
 
   return (
     <TableRow className="border-none">
@@ -139,7 +152,7 @@ const Row = ({
         <Link href={`/project/${id}`}>
           <div className="flex flex-col gap-2 items-center">
             <Image
-              src={imageURL || tokenPlaceholder.src}
+              src={tokenPlaceholder.src}
               alt="token logo"
               height={63}
               width={63}
@@ -148,7 +161,6 @@ const Row = ({
           </div>
         </Link>
       </TableCell>
-      
 
       <TableCell className="text-right text-lg">
         {formatNumber(raised)} ETH
@@ -163,8 +175,19 @@ const Row = ({
       {status === "PENDING" && (
         <TableCell>
           <div className="flex gap-1">
-            <Button onClick={handleDeploy}>Deploy</Button>
-            <Button variant="destructive" onClick={handleReject}>
+            <Button
+              onClick={handleDeploy}
+              disabled={isPending}
+              className="flex gap-2"
+            >
+              Deploy
+              {isPending && <FiLoader className="animate-spin" />}
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleReject}
+              disabled={isPending}
+            >
               Reject
             </Button>
           </div>

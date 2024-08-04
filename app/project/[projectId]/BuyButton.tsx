@@ -1,11 +1,13 @@
 "use client";
 
-import { useWriteContract } from "wagmi";
+import { useReadContract, useWriteContract } from "wagmi";
 import { parseEther } from "viem";
 import { abi } from "@/abis/abi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { contractAddress } from "@/app/consts";
+import { FiLoader } from "react-icons/fi";
 
 interface BuyButtonProps {
   tokenAddress: string | null;
@@ -13,13 +15,24 @@ interface BuyButtonProps {
 
 export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
   const [ethValue, setEthValue] = useState("");
-  const { writeContract, error } = useWriteContract();
+  const { writeContract, error, isPending, isSuccess } = useWriteContract();
+
+  const { data: tokens, isLoading } = useReadContract({
+    abi,
+    address: contractAddress,
+    functionName: "getAmountOut",
+    args: [tokenAddress, parseEther(ethValue)],
+  });
+
+  useEffect(() => {
+    if (isSuccess) setEthValue("");
+  }, [isSuccess]);
 
   if (error) console.error(error);
 
   const buyToken = async () => {
     writeContract({
-      address: "0x271ce2a8bfc78b5408c689fb2b51a9fa8ab49990",
+      address: contractAddress,
       abi,
       functionName: "buyToken",
       args: [
@@ -29,19 +42,31 @@ export const BuyButton = ({ tokenAddress }: BuyButtonProps) => {
 
       value: parseEther(ethValue), // Replace with the amount of ETH to send
     });
-
-    // TODO: pick ether value
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <Input
         value={ethValue}
         onChange={(e) => setEthValue(e.target.value)}
         placeholder="0.001"
+        disabled={isPending}
       />
-      <Button onClick={buyToken} disabled={!tokenAddress} className="w-full">
-        Buy
+      <Button
+        onClick={buyToken}
+        disabled={!tokenAddress || isPending}
+        className="w-full flex gap-2 items-center"
+      >
+        Buy{" "}
+        {isLoading ? (
+          <FiLoader className="animate-spin" />
+        ) : tokens && typeof tokens === "bigint" ? (
+          (tokens / BigInt("100000000000000000000")).toString()
+        ) : (
+          "0"
+        )}{" "}
+        tokens
+        {isPending && <FiLoader className="animate-spin" />}
       </Button>
     </div>
   );
