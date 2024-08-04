@@ -41,6 +41,7 @@ const Row = ({
   discord,
   telegram,
   twitter,
+  imageURL,
 }: ProjectData) => {
   const router = useRouter();
   const { address } = useAccount();
@@ -112,7 +113,7 @@ const Row = ({
           discordURL: discord,
           websiteURL: website,
           telegramURL: telegram,
-          imageURL: "image", // TODO
+          imageURL: imageURL, // TODO
           tokenCreator: address,
           // this values are hardcoded for now, but will be configurable in the future
           totalSupply: BigInt("1000000000000000000000000000"),
@@ -131,13 +132,14 @@ const Row = ({
     router.refresh();
   };
 
+
   return (
     <TableRow className="border-none">
       <TableCell className="font-medium">
         <Link href={`/project/${id}`}>
           <div className="flex flex-col gap-2 items-center">
             <Image
-              src={tokenPlaceholder.src}
+              src={imageURL || tokenPlaceholder.src}
               alt="token logo"
               height={63}
               width={63}
@@ -146,6 +148,7 @@ const Row = ({
           </div>
         </Link>
       </TableCell>
+      
 
       <TableCell className="text-right text-lg">
         {formatNumber(raised)} ETH

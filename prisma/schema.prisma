@@ -19,13 +19,14 @@ model Project {
   telegram        String
   proposer        String // proposer address
   humanityScore   Int
-  // tokenAvatar     String  // TODO: see how do we implement this
+  
   status          ProjectStatus @default(PENDING)
   isActive       Boolean @default(false)
   launchType      LaunchType
   team            String?
   roadmap         String?
   tokenAddress    String?
+  imageURL        String?
  
   whitepaper      String?
 

@@ -5,6 +5,16 @@ const nextConfig = {
     config.externals.push("pino-pretty", "encoding");
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'yellow-secret-hawk-658.mypinata.cloud',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
